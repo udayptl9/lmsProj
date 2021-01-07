@@ -1,0 +1,109 @@
+<?php include('header_dashboard.php'); ?>
+<?php include('session.php'); ?>
+    <body>
+    <?php include('navbar_student.php'); ?>
+        <div class="container-fluid">
+            <div class="row-fluid">
+        <?php include('cgpa_sidebar.php'); ?>
+                <div class="span9" id="content">
+                     <div class="row-fluid">
+              <!-- breadcrumb -->
+        
+                  
+               <ul class="breadcrumb">
+            <?php
+            $school_year_query = mysqli_query($conn,"select * from school_year order by school_year DESC")or die(mysqli_error());
+            $school_year_query_row = mysqli_fetch_array($school_year_query);
+            $school_year = $school_year_query_row['school_year'];
+            ?>
+              <li><a href="#"><b>My Class</b></a><span class="divider">/</span></li>
+              <li><a href="#">School Year: <?php echo $school_year_query_row['school_year']; ?></a></li>
+            </ul>
+             <!-- end breadcrumb -->
+           
+
+
+
+        
+           
+                        <!-- block -->
+                        <div class="block" style="width:300px;">
+                            <div class="navbar navbar-inner block-header">
+                                <div id="" class="muted pull-center" style="width: 250px;">
+                  
+                                
+                               
+                                    <html><head><title>
+                                      GPA
+                                      </title>
+                                      <style>
+                                        #go{
+                                          margin-top: -10px;
+                                        }
+                                      </style></head>
+                                      <body style="font-family:Helvetica">
+                                      <label>Choose your semester uptill which you want to find your cgpa:</label> <form action='cgpa_table.php' method='get'>
+                                         <!--<input type='radio' name='sem' value='1' checked='checked'/>Semester1<br/>
+                                         <input type='radio' name='sem' value='2'/>Semester2<br/>
+                                         <input type='radio' name='sem' value='3'/>Semester3<br/>
+                                         <input type='radio' name='sem' value='4'/>Semester4<br/>
+                                         <input type='radio' name='sem' value='5'/>Semester5<br/>
+                                         <input type='radio' name='sem' value='6'/>Semester6<br/>
+                                         <input type='radio' name='sem' value='7'/>Semester7<br/>
+                                         <input type='radio' name='sem' value='8'/>Semester8<br/>-->
+                                        <select name='sem'>
+                                        <option value='1'>Semester1</option>
+                                      <option value='2'>Semester 2</option>
+                                      <option value='3'>Semester 3</option>
+                                      <option value='4'>Semester 4</option>
+                                      <option value='5'>Semester 5</option>
+                                      <option value='6'>Semester 6</option>
+                                      <option value='7'>Semester 7</option>
+                                      <option value='8'>Semester 8</option>
+                                      </select>
+                                      &nbsp&nbsp
+                                      
+                                      <label>Choose your department:</label>
+                                      <!--<input type='radio' name='dep' value='ece' checked='checked'/>ECE<br/>
+                                      <input type='radio' name='dep' value='it'/>IT<br/>
+                                      <input type='radio' name='dep' value='cse'/>CSE<br/>
+                                      <input type='radio' name='dep' value='mech'/>MECH<br/>
+                                      <input type='radio' name='dep' value='eee'/>EEE<br/>
+                                      <input type='radio' name='dep' value='aero'/>AERO<br/>
+                                      <input type='radio' name='dep' value='civil'/>CIVIL<br/>
+                                      <input type='radio' name='dep' value='auto'/>AUTOMOBILE<br/>-->
+                                      <select name='dep'>
+                                      <option value='aero'>Aeronaurical</option>
+                                      <option value='cse'>Computer science and Eng</option>
+                                      <option value='ece'>Electronics and Communication Eng</option>
+                                      <option value='eee'>Electical and Electronics Eng</option>
+                                      <option value='mech'>Mechanical Eng</option>
+                                      <option value='it'>Information Tech</option>
+                                      </select>
+                                        <input type='submit' id="go" class="btn btn-success" value='GO!'/>
+                                        </form>
+                                      </center>
+
+                                        </body>
+                                       </html>
+
+                                            
+                                                        
+                                                  
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+
+                    </div>
+
+
+                </div>
+      
+            </div>
+    <?php include('footer.php'); ?>
+        </div>
+    <?php include('script.php'); ?>
+    </body>
+</html>
+ 
