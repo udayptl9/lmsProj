@@ -1,3 +1,3 @@
 <?php
-$conn = mysqli_connect('localhost','root','Bagalkot@1','capstone') or die(mysqli_error());
+$conn = mysqli_connect('localhost','root','','capstone') or die(mysqli_error());
 ?>
