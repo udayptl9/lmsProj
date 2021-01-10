@@ -4,7 +4,13 @@
 		<?php include('navbar.php') ?>
         <div class="container-fluid">
             <div class="row-fluid">
-					<?php include('sidebar_dashboard.php'); ?>
+                    <?php 
+                    if(number_format($_SESSION['department']) == 0) {
+                        include('mainAdmin_Sidebar.php');
+                    } else {
+                        include('subAdminSidebar.php');
+                    }
+                    ?>
                 <!--/span-->
                 <div class="span9" id="content">
 						<div class="row-fluid"></div>

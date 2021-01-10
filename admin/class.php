@@ -30,7 +30,15 @@
 										</thead>
 										<tbody>
 										<?php
-										$class_query = mysqli_query($conn,"select * from class")or die(mysqli_error());
+										$department_id = number_format($_SESSION['department']);
+										if($department_id == 0) {
+											$class_query = mysqli_query($conn,"SELECT * FROM class;");	
+										} else {
+											$class_query = mysqli_query($conn,"SELECT * FROM class WHERE did=$department_id;");
+										}
+										if($class_query==false) {
+											die(mysqli_error($conn));
+										}
 										while($class_row = mysqli_fetch_array($class_query)){
 										$id = $class_row['class_id'];
 										?>

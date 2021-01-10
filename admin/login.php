@@ -12,6 +12,7 @@
 		if ($count > 0){
 		
 		$_SESSION['id']=$row['user_id'];
+		$_SESSION['department']=$row['did'];
 		
 		echo 'true';
 		

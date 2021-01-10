@@ -31,7 +31,10 @@
 										<tbody>
 											
 												<?php
-											$subject_query = mysqli_query($conn,"select * from subject")or die(mysqli_error());
+											$department_id = number_format($_SESSION['department']);
+											$sql = "SELECT * FROM subject WHERE cid IN (SELECT class_id FROM class WHERE did=$department_id)";
+											$subject_query = mysqli_query($conn,$sql)or die(mysqli_error());
+											echo mysqli_error($conn);
 											while($row = mysqli_fetch_array($subject_query)){
 											$id = $row['subject_id'];
 											?>

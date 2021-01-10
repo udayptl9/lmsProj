@@ -24,10 +24,25 @@
                                             <input class="input focused" name="username" id="focusedInput" type="text" placeholder = "Username" required>
                                           </div>
                                         </div>
+
+                                        <div class="control-group">
+                                          <div class="controls">
+                                            <select name="department_id">
+                                            <?php 
+                                              $departments = mysqli_query($conn, "SELECT * FROM department");
+                                              if($departments) {
+                                                while($row=mysqli_fetch_array($departments)) {
+                                                  echo '<option value='.$row['department_id'].'>'.$row['department_name'].'</option>';
+                                                }
+                                               }
+                                            ?>
+                                            </select>
+                                          </div>
+                                        </div>
 										
 										<div class="control-group">
                                           <div class="controls">
-                                            <input class="input focused" name="password" id="focusedInput" type="text" placeholder = "Password" required>
+                                            <input class="input focused" name="password" id="focusedInput" type="password" placeholder = "Password" required>
                                           </div>
                                         </div>
 										
@@ -50,6 +65,7 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $username = $_POST['username'];
 $password = $_POST['password'];
+$department_id = $_POST['department_id'];
 
 
 $query = mysqli_query($conn,"select * from users where username = '$username' and password = '$password' and firstname = '$firstname' and password = '$password' ")or die(mysqli_error());
@@ -61,7 +77,7 @@ alert('Data Already Exist');
 </script>
 <?php
 }else{
-mysqli_query($conn,"insert into users (username,password,firstname,lastname) values('$username','$password','$firstname','$lastname')")or die(mysqli_error());
+mysqli_query($conn,"insert into users (username,password,firstname,lastname, did) values('$username','$password','$firstname','$lastname', $department_id)")or die(mysqli_error());
 
 mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$user_username','Add User $username')")or die(mysqli_error());
 ?>
