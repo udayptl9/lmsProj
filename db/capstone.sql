@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2021 at 04:28 AM
+-- Generation Time: Jan 10, 2021 at 02:59 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,10 @@ INSERT INTO `activity_log` (`activity_log_id`, `username`, `date`, `action`) VAL
 (12, '', '2020-12-29 10:06:14', 'Add School Year 2020-21(o)'),
 (13, '', '2020-12-29 10:12:20', 'Add School Year 2020-21(e)'),
 (14, '', '2020-12-29 10:13:51', 'Add School Year 2020-21(e)'),
-(15, '', '2020-12-29 10:14:54', 'Add School Year 2019-2020');
+(15, '', '2020-12-29 10:14:54', 'Add School Year 2019-2020'),
+(16, 'admin', '2021-01-07 19:47:54', 'Add User udayptl9'),
+(17, 'admin', '2021-01-07 20:13:58', 'Add User agasar123'),
+(18, 'admin', '2021-01-07 20:42:21', 'Add User csAdmin');
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,46 @@ INSERT INTO `assignment` (`assignment_id`, `floc`, `fdatein`, `fdesc`, `teacher_
 (37, 'admin/uploads/2281_File_Jan-2019.pdf', '2020-12-31 18:36:12', 'assign', 9, 196, 'assign', ''),
 (38, 'admin/uploads/6836_File_Jan-2019.pdf', '2020-12-31 18:38:46', 'daffafssaf', 9, 196, 'assign-1000', '100'),
 (39, 'admin/uploads/6836_File_Jan-2019.pdf', '2020-12-31 18:38:46', 'daffafssaf', 9, 198, 'assign-1000', '100'),
-(41, 'admin/uploads/1274_File_Jan-2019.pdf', '2020-12-31 18:52:38', 'sagu', 9, 196, 'sagu', '50');
+(41, 'admin/uploads/1274_File_Jan-2019.pdf', '2020-12-31 18:52:38', 'sagu', 9, 196, 'sagu', '50'),
+(42, 'admin/uploads/9242_File_studentsSheet.xlsx', '2021-01-01 10:20:52', 'assign', 9, 196, 'assign', '100'),
+(43, 'admin/uploads/4020_File_studentsSheet.xlsx', '2021-01-01 10:57:35', 'sagar``````', 9, 196, 'sagar`', '100'),
+(44, 'admin/uploads/4020_File_studentsSheet.xlsx', '2021-01-01 10:57:35', 'sagar``````', 9, 198, 'sagar`', '100'),
+(45, 'admin/uploads/7926_File_studentsSheet.xlsx', '2021-01-01 11:29:20', 'dsssd', 9, 196, 'sdds', '100'),
+(46, 'admin/uploads/7926_File_studentsSheet.xlsx', '2021-01-01 11:29:20', 'dsssd', 9, 198, 'sdds', '100'),
+(47, 'admin/uploads/9677_File_studentsSheet.xlsx', '2021-01-01 11:42:29', 'sagu', 9, 196, 'sagu', '500'),
+(48, 'admin/uploads/9677_File_studentsSheet.xlsx', '2021-01-01 11:42:29', 'sagu', 9, 198, 'sagu', '500'),
+(49, 'admin/uploads/7363_File_studentsSheet.xlsx', '2021-01-01 11:45:36', 'qwerty', 9, 196, 'qwwqqw', '1000'),
+(50, 'admin/uploads/7363_File_studentsSheet.xlsx', '2021-01-01 11:45:36', 'qwerty', 9, 198, 'qwwqqw', '1000'),
+(51, 'admin/uploads/2908_File_studentsSheet.xlsx', '2021-01-01 11:47:24', 'trewq', 9, 196, 'qwertt', '1000'),
+(52, 'admin/uploads/2908_File_studentsSheet.xlsx', '2021-01-01 11:47:24', 'trewq', 9, 198, 'qwertt', '1000'),
+(53, 'admin/uploads/9472_File_studentsSheet.xlsx', '2021-01-01 11:57:43', 'ddddssss', 9, 196, 'sddddd', '500'),
+(54, 'admin/uploads/9472_File_studentsSheet.xlsx', '2021-01-01 11:57:43', 'ddddssss', 9, 198, 'sddddd', '500'),
+(55, 'admin/uploads/1847_File_studentsSheet.xlsx', '2021-01-01 12:22:52', 'hggg111', 9, 196, 'hgggg', '500'),
+(56, 'admin/uploads/1847_File_studentsSheet.xlsx', '2021-01-01 12:22:52', 'hggg111', 9, 198, 'hgggg', '500'),
+(57, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:00', 'jhj', 9, 196, 'jhg', ''),
+(58, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:01', 'jhj', 9, 198, 'jhg', ''),
+(59, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:01', 'jhj', 9, 207, 'jhg', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendence`
+--
+
+CREATE TABLE `attendence` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `attendence` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `attendence`
+--
+
+INSERT INTO `attendence` (`id`, `class_id`, `teacher_id`, `date`, `attendence`) VALUES
+(11, 12, 9, '10/1/2021', '[{\"rollNo\":151,\"firstname\":\"Karyl June\",\"lastname\":\"Bacobo\",\"attendence\":1},{\"rollNo\":146,\"firstname\":\"Johnedel\",\"lastname\":\"Bauno\",\"attendence\":1},{\"rollNo\":157,\"firstname\":\"Ace John\",\"lastname\":\"Casuyon\",\"attendence\":1},{\"rollNo\":147,\"firstname\":\"Jerwin\",\"lastname\":\"Delos Reyes\",\"attendence\":1},{\"rollNo\":144,\"firstname\":\"Neovi\",\"lastname\":\"Devierte\",\"attendence\":1},{\"rollNo\":155,\"firstname\":\"Ma. Roxette\",\"lastname\":\"Infante\",\"attendence\":1},{\"rollNo\":134,\"firstname\":\"Victor Anthony\",\"lastname\":\"Jacobo\",\"attendence\":0},{\"rollNo\":143,\"firstname\":\"Danica\",\"lastname\":\"Lamis\",\"attendence\":1},{\"rollNo\":145,\"firstname\":\"Eril Pio\",\"lastname\":\"Mercado\",\"attendence\":1},{\"rollNo\":159,\"firstname\":\"Mary Ann\",\"lastname\":\"Panaguiton\",\"attendence\":1},{\"rollNo\":150,\"firstname\":\"Jethro\",\"lastname\":\"Pansales\",\"attendence\":1},{\"rollNo\":154,\"firstname\":\"Mae Ann\",\"lastname\":\"Panugaling\",\"attendence\":1},{\"rollNo\":158,\"firstname\":\"Rose Mae\",\"lastname\":\"Pido\",\"attendence\":1},{\"rollNo\":156,\"firstname\":\"Savrena Joy\",\"lastname\":\"Rael\",\"attendence\":1},{\"rollNo\":152,\"firstname\":\"Kristelle Shaine\",\"lastname\":\"Rubi\",\"attendence\":1},{\"rollNo\":149,\"firstname\":\"Jebson\",\"lastname\":\"Tordillos\",\"attendence\":1},{\"rollNo\":142,\"firstname\":\"Lee Ann\",\"lastname\":\"Vertucio\",\"attendence\":1},{\"rollNo\":148,\"firstname\":\"Jendrix\",\"lastname\":\"Victosa\",\"attendence\":0},{\"rollNo\":153,\"firstname\":\"Richelle\",\"lastname\":\"Villarmia\",\"attendence\":1}]');
 
 -- --------------------------------------------------------
 
@@ -220,7 +262,8 @@ CREATE TABLE `class_subject_overview` (
 --
 
 INSERT INTO `class_subject_overview` (`class_subject_overview_id`, `teacher_class_id`, `content`) VALUES
-(1, 167, '<p>Chapter&nbsp; 1</p>\r\n\r\n<p>Cha</p>\r\n');
+(1, 167, '<p>Chapter&nbsp; 1</p>\r\n\r\n<p>Cha</p>\r\n'),
+(2, 196, '<p>kjhgkjhgkjh</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -264,6 +307,13 @@ CREATE TABLE `course` (
   `course_name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`course_id`, `course_name`) VALUES
+(1, '');
+
 -- --------------------------------------------------------
 
 --
@@ -297,12 +347,21 @@ CREATE TABLE `edit_profile` (
   `name` varchar(250) NOT NULL,
   `designation` varchar(250) NOT NULL,
   `proficiency` varchar(250) NOT NULL,
-  `teching_exp` varchar(250) NOT NULL,
+  `teaching_exp` varchar(250) NOT NULL,
   `project` varchar(250) NOT NULL,
   `qualification` varchar(250) NOT NULL,
-  `teacher_id` int(20) NOT NULL,
-  `publication` varchar(250) NOT NULL
+  `publication` varchar(250) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `teacher_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `edit_profile`
+--
+
+INSERT INTO `edit_profile` (`profile_id`, `name`, `designation`, `proficiency`, `teaching_exp`, `project`, `qualification`, `publication`, `image`, `teacher_id`) VALUES
+(1, 'uday', 'designation', 'qualification', 'profociency', 'teaching', 'project', 'publication', 'image', 0),
+(17, 'Jomar Pabuaya', 'Professor', 'Java', '12y', 'Image Processing', 'M.Tech', '{\"publications\":[\"IEEE\",\"ieeeeee\"]}', 'profiles/Penguins.jpg', 9);
 
 -- --------------------------------------------------------
 
@@ -375,7 +434,10 @@ INSERT INTO `files` (`file_id`, `floc`, `fdatein`, `fdesc`, `teacher_id`, `class
 (139, 'admin/uploads/3579_File_sample.pdf', '2020-12-21 09:38:22', 'adasd', 9, 186, '234234', 'JomarPabuaya'),
 (140, 'admin/uploads/6898_File_sample.pdf', '2020-12-21 09:39:32', 'adasd', 9, 186, '234234', 'JomarPabuaya'),
 (141, 'admin/uploads/9782_File_sample.pdf', '2020-12-21 09:40:28', 'adasd', 9, 186, '234234', 'JomarPabuaya'),
-(142, 'admin/uploads/8177_File_JUNE-JULY-2017 - CS-min (2).pdf', '2020-12-30 14:17:07', 'lmlml', 18, 197, 'kmkmkm', 'AllanDela Torre');
+(142, 'admin/uploads/8177_File_JUNE-JULY-2017 - CS-min (2).pdf', '2020-12-30 14:17:07', 'lmlml', 18, 197, 'kmkmkm', 'AllanDela Torre'),
+(143, 'admin/uploads/8379_File_add_assignment.php', '2021-01-07 16:29:13', 'kjh', 9, 196, 'uuu', 'JomarPabuaya'),
+(144, 'admin/uploads/8379_File_add_assignment.php', '2021-01-07 16:29:13', 'kjh', 9, 198, 'uuu', 'JomarPabuaya'),
+(145, 'admin/uploads/8379_File_add_assignment.php', '2021-01-07 16:29:13', 'kjh', 9, 207, 'uuu', 'JomarPabuaya');
 
 -- --------------------------------------------------------
 
@@ -494,7 +556,28 @@ INSERT INTO `notification` (`notification_id`, `teacher_class_id`, `notification
 (36, 196, 'Add Assignment name <b>assign-1000</b>', '2020-12-31 18:38:46', 'assignment_student.php'),
 (37, 198, 'Add Assignment name <b>assign-1000</b>', '2020-12-31 18:38:46', 'assignment_student.php'),
 (38, 196, 'Add Assignment file name <b>sagu</b>', '2020-12-31 18:51:11', 'assignment_student.php'),
-(39, 196, 'Add Assignment file name <b>sagu</b>', '2020-12-31 18:52:38', 'assignment_student.php');
+(39, 196, 'Add Assignment file name <b>sagu</b>', '2020-12-31 18:52:38', 'assignment_student.php'),
+(40, 196, 'Add Assignment name <b>assign</b>', '2021-01-01 10:20:52', 'assignment_student.php'),
+(41, 196, 'Add Assignment name <b>sagar`</b>', '2021-01-01 10:57:35', 'assignment_student.php'),
+(42, 198, 'Add Assignment name <b>sagar`</b>', '2021-01-01 10:57:35', 'assignment_student.php'),
+(43, 196, 'Add Assignment name <b>sdds</b>', '2021-01-01 11:29:20', 'assignment_student.php'),
+(44, 198, 'Add Assignment name <b>sdds</b>', '2021-01-01 11:29:20', 'assignment_student.php'),
+(45, 196, 'Add Assignment name <b>sagu</b>', '2021-01-01 11:42:29', 'assignment_student.php'),
+(46, 198, 'Add Assignment name <b>sagu</b>', '2021-01-01 11:42:29', 'assignment_student.php'),
+(47, 196, 'Add Assignment name <b>qwwqqw</b>', '2021-01-01 11:45:36', 'assignment_student.php'),
+(48, 198, 'Add Assignment name <b>qwwqqw</b>', '2021-01-01 11:45:36', 'assignment_student.php'),
+(49, 196, 'Add Assignment name <b>qwertt</b>', '2021-01-01 11:47:24', 'assignment_student.php'),
+(50, 198, 'Add Assignment name <b>qwertt</b>', '2021-01-01 11:47:24', 'assignment_student.php'),
+(51, 196, 'Add Assignment name <b>sddddd</b>', '2021-01-01 11:57:43', 'assignment_student.php'),
+(52, 198, 'Add Assignment name <b>sddddd</b>', '2021-01-01 11:57:43', 'assignment_student.php'),
+(53, 196, 'Add Assignment name <b>hgggg</b>', '2021-01-01 12:22:52', 'assignment_student.php'),
+(54, 198, 'Add Assignment name <b>hgggg</b>', '2021-01-01 12:22:52', 'assignment_student.php'),
+(55, 196, 'Add Downloadable Materials file name <b>uuu</b>', '2021-01-07 16:29:13', 'downloadable_student.php'),
+(56, 198, 'Add Downloadable Materials file name <b>uuu</b>', '2021-01-07 16:29:13', 'downloadable_student.php'),
+(57, 207, 'Add Downloadable Materials file name <b>uuu</b>', '2021-01-07 16:29:13', 'downloadable_student.php'),
+(58, 196, 'Add Assignment name <b>jhg</b>', '2021-01-07 16:31:01', 'assignment_student.php'),
+(59, 198, 'Add Assignment name <b>jhg</b>', '2021-01-07 16:31:01', 'assignment_student.php'),
+(60, 207, 'Add Assignment name <b>jhg</b>', '2021-01-07 16:31:01', 'assignment_student.php');
 
 -- --------------------------------------------------------
 
@@ -670,7 +753,7 @@ INSERT INTO `student` (`student_id`, `firstname`, `lastname`, `dob`, `class_id`,
 (113, 'Clifford', 'Ledesma', 0, 13, '21100324', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (112, 'Raymond', 'Serion', 0, 13, '2700372', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (111, 'Mark Dominic', 'Sayon', 0, 13, '21100867', 'heni', 'uploads/mark.jpg', 'Unregistered', '0', '0'),
-(108, 'Kaye Angela', 'Cueva', 0, 13, '21101151', '', 'uploads/dp.jpg', 'Unregistered', '0', '0'),
+(234, 'Vishal', 'Agasar', 2081999, 8, '2BL17ME132', '', '', 'Unregistered', '', ''),
 (105, 'Neljie', 'Guirnela', 0, 13, '21101131', '', 'uploads/Koala.jpg', 'Unregistered', '0', '0'),
 (106, 'Razel', 'Palermo', 0, 13, '29000676', '', 'uploads/razel.jpg', 'Unregistered', '0', '0'),
 (103, 'Jade', 'Gordoncillo', 0, 13, '21100617', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
@@ -684,9 +767,9 @@ INSERT INTO `student` (`student_id`, `firstname`, `lastname`, `dob`, `class_id`,
 (93, 'John Kevin ', 'Lorayna', 0, 7, '111', 'teph', 'uploads/3094_384893504898082_1563225657_n.jpg', 'Registered', '0', '0'),
 (94, 'Leah Mae', 'Padilla', 0, 13, '21100471', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (76, 'Jamaica Mae', 'Alipe', 0, 13, '21100555', '123', 'uploads/maica.jpg', 'Registered', '0', '0'),
-(107, 'Jose Harry', 'Polondaya', 0, 13, '29001002', 'florypis', 'uploads/harry.jpg', 'Registered', '0', '0'),
+(235, 'Sarvesh', 'Goddagi', 2081999, 8, '2BL17ME133', '', '', 'Unregistered', '', ''),
 (110, 'Zyryn', 'Corugda', 0, 13, '21100881', '', 'uploads/baby.jpg', 'Unregistered', '0', '0'),
-(109, 'Rena', 'Lamberto', 0, 13, '29001081', '', 'uploads/ca.jpg', 'Unregistered', '0', '0'),
+(233, 'Uday', 'Patil', 2081999, 8, '2BL17ME131', '', '', 'Unregistered', '', ''),
 (99, 'Ryan Teofilo', 'Malbata-an', 0, 13, '21100315', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (96, 'Glecy Marie', 'Navarosa', 0, 13, '20101436', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (209, 'dhalia', 'hofilena', 0, 20, '21300311', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
@@ -698,7 +781,7 @@ INSERT INTO `student` (`student_id`, `firstname`, `lastname`, `dob`, `class_id`,
 (134, 'Victor Anthony', 'Jacobo', 0, 12, '21101050', 'akositon', 'uploads/win_boot_screen_16_9_by_medi_dadu-d4s7dc1.gif', 'Registered', '0', '0'),
 (135, 'Albert Kezzel', 'Naynay', 0, 14, '20101361', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (136, 'Jorgielyn', 'Serfino', 0, 7, '20100331', 'jorgie', 'uploads/Koala.jpg', 'Registered', '0', '0'),
-(137, 'Wina Mae', 'Espenorio', 0, 8, '20100447', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
+(137, 'Wina Mae', 'Espenorio', 0, 8, '20100447', 'sagu123', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Registered', '7000000000', '8000000000'),
 (138, 'Brian Paul', 'Sablan', 0, 7, '29000557', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (139, 'Rodzil', 'Camato', 0, 7, '20100RC', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (140, 'Dean Martin', 'Tingson', 0, 14, '21100665', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
@@ -776,7 +859,15 @@ INSERT INTO `student` (`student_id`, `firstname`, `lastname`, `dob`, `class_id`,
 (217, 'Alyssa', 'David', 0, 17, '21200507', '', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Unregistered', '0', '0'),
 (218, 'josie', 'banday', 0, 7, '20100452', 'heaven', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Registered', '0', '0'),
 (219, 'Claire ', 'Blake', 0, 18, '2011120', 'cblake123', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Registered', '0', '0'),
-(232, 'sagar', 'sagar', 77889999, 7, '112233', 'sagar', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Registered', '7019190195', '7019190198');
+(232, 'sagar', 'sagar', 77889999, 7, '112233', 'sagar', 'uploads/NO-IMAGE-AVAILABLE.jpg', 'Registered', '7019190195', '7019190198'),
+(236, 'Uday', 'Patil', 2081999, 8, '2BL17ME134', '', '', 'Unregistered', '', ''),
+(237, 'Uday', 'Patil', 2081999, 8, '2BL17ME135', '', '', 'Unregistered', '', ''),
+(238, 'Uday', 'Patil', 2081999, 8, '2BL17ME136', '', '', 'Unregistered', '', ''),
+(239, 'Uday', 'Patil', 2081999, 8, '2BL17ME137', '', '', 'Unregistered', '', ''),
+(240, 'Uday', 'Patil', 2081999, 8, '2BL17ME138', '', '', 'Unregistered', '', ''),
+(241, 'Uday', 'Patil', 2081999, 8, '2BL17ME139', '', '', 'Unregistered', '', ''),
+(242, 'Uday', 'Patil', 2081999, 8, '2BL17ME140', '', '', 'Unregistered', '', ''),
+(243, 'Uday', 'Patil', 2081999, 8, '2BL17ME141', '', '', 'Unregistered', '', '');
 
 -- --------------------------------------------------------
 
@@ -792,16 +883,31 @@ CREATE TABLE `student_assignment` (
   `fdesc` varchar(100) NOT NULL,
   `fname` varchar(50) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `grade` varchar(5) NOT NULL
+  `grade` varchar(5) NOT NULL,
+  `roll_no` varchar(215) NOT NULL,
+  `marks_alloc` varchar(250) NOT NULL,
+  `totalmarks` varchar(115) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student_assignment`
 --
 
-INSERT INTO `student_assignment` (`student_assignment_id`, `assignment_id`, `floc`, `assignment_fdatein`, `fdesc`, `fname`, `student_id`, `grade`) VALUES
-(1, 31, 'admin/uploads/7820_File_sample.pdf', '2020-12-21 10:12:04', 'aaa', 'asdasd', 219, ''),
-(2, 41, 'admin/uploads/6991_File_Jan-2019.pdf', '2020-12-31 18:56:28', 'test', 'test', 111, '');
+INSERT INTO `student_assignment` (`student_assignment_id`, `assignment_id`, `floc`, `assignment_fdatein`, `fdesc`, `fname`, `student_id`, `grade`, `roll_no`, `marks_alloc`, `totalmarks`) VALUES
+(1, 31, 'admin/uploads/7820_File_sample.pdf', '2020-12-21 10:12:04', 'aaa', 'asdasd', 219, '', '', '', ''),
+(2, 41, 'admin/uploads/6991_File_Jan-2019.pdf', '2020-12-31 18:56:28', 'test', 'test', 111, '', '', '', ''),
+(3, 32, 'admin/uploads/1378_File_studentsSheet.xlsx', '2021-01-01 10:21:51', 'roll no-50', 'assign', 111, '', '', '', ''),
+(4, 43, 'admin/uploads/8900_File_studentsSheet.xlsx', '2021-01-01 10:58:22', 'roll no-50', 'assign', 111, '50', '', '', ''),
+(5, 45, 'admin/uploads/2706_File_studentsSheet.xlsx', '2021-01-01 11:30:11', 'dsd', 'sdsd', 111, '', '', '', ''),
+(6, 47, 'admin/uploads/1504_File_studentsSheet.xlsx', '2021-01-01 11:43:32', 'ass', 'asss', 111, '', '', '', ''),
+(7, 55, 'admin/uploads/2824_File_studentsSheet.xlsx', '2021-01-01 12:23:49', 'roll no-50', 'hgggg', 111, '', '', '', ''),
+(8, 55, 'admin/uploads/3014_File_studentsSheet.xlsx', '2021-01-01 12:27:09', 'roll no-50', 'assign', 137, '', '', '', ''),
+(9, 55, 'admin/uploads/8302_File_studentsSheet.xlsx', '2021-01-01 17:00:58', 'asas', 'hgggg', 111, '', '', '', ''),
+(10, 55, 'admin/uploads/6352_File_studentsSheet.xlsx', '2021-01-01 17:03:41', 'asadsdkdnj', 'assign', 111, '', '', '', ''),
+(11, 55, 'admin/uploads/1892_File_Jan-2019.pdf', '2021-01-01 17:08:27', 'description', 'suhaKJASDH', 111, '', '', '', ''),
+(12, 55, 'admin/uploads/4568_File_Jan-2019.pdf', '2021-01-01 17:14:59', 'DSSAsd', 'asda', 111, '', 'asdaWQ', '[{\"questionNo\":\"1a\",\"marksObtained\":\"25\"},{\"questionNo\":\"2b\",\"marksObtained\":\"50\"}]', '75'),
+(13, 55, 'admin/uploads/1937_File_11414017524-NOV-20365767.PDF', '2021-01-02 11:42:45', 'assignment-0011', 'assignment', 111, '', '50', '', ''),
+(14, 55, 'admin/uploads/5304_File_terms-and-condition.pdf', '2021-01-02 11:56:43', 'assignment-00120', 'assignment', 111, '', '55', '', '');
 
 -- --------------------------------------------------------
 
@@ -994,7 +1100,8 @@ INSERT INTO `teacher_class` (`teacher_class_id`, `teacher_id`, `class_id`, `subj
 (203, 18, 8, 17, 'admin/uploads/thumbnails.jpg', '', 4),
 (204, 18, 8, 17, 'admin/uploads/thumbnails.jpg', '', 4),
 (205, 18, 8, 17, 'admin/uploads/thumbnails.jpg', '2020-21(e)', 4),
-(206, 18, 12, 24, 'admin/uploads/thumbnails.jpg', '2020-21(e)', 4);
+(206, 18, 12, 24, 'admin/uploads/thumbnails.jpg', '2020-21(e)', 4),
+(207, 9, 13, 23, 'admin/uploads/thumbnails.jpg', '2020-21(e)', 4);
 
 -- --------------------------------------------------------
 
@@ -1049,7 +1156,6 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (32, 165, 134, 134),
 (54, 167, 113, 12),
 (55, 167, 112, 12),
-(57, 167, 108, 12),
 (58, 167, 105, 12),
 (59, 167, 106, 12),
 (60, 167, 103, 12),
@@ -1062,9 +1168,7 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (67, 167, 95, 12),
 (68, 167, 94, 12),
 (69, 167, 76, 12),
-(70, 167, 107, 12),
 (71, 167, 110, 12),
-(72, 167, 109, 12),
 (73, 167, 99, 12),
 (74, 167, 96, 12),
 (75, 167, 75, 12),
@@ -1099,7 +1203,6 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (127, 172, 113, 18),
 (128, 172, 112, 18),
 (129, 172, 111, 18),
-(130, 172, 108, 18),
 (131, 172, 105, 18),
 (132, 172, 106, 18),
 (133, 172, 103, 18),
@@ -1112,9 +1215,7 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (140, 172, 95, 18),
 (141, 172, 94, 18),
 (142, 172, 76, 18),
-(143, 172, 107, 18),
 (144, 172, 110, 18),
-(145, 172, 109, 18),
 (146, 172, 99, 18),
 (147, 172, 96, 18),
 (148, 172, 75, 18),
@@ -1168,7 +1269,6 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (196, 175, 113, 13),
 (197, 175, 112, 13),
 (198, 175, 111, 13),
-(199, 175, 108, 13),
 (200, 175, 105, 13),
 (201, 175, 106, 13),
 (202, 175, 103, 13),
@@ -1181,9 +1281,7 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (209, 175, 95, 13),
 (210, 175, 94, 13),
 (211, 175, 76, 13),
-(212, 175, 107, 13),
 (213, 175, 110, 13),
-(214, 175, 109, 13),
 (215, 175, 99, 13),
 (216, 175, 96, 13),
 (217, 175, 75, 13),
@@ -1237,7 +1335,6 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (265, 178, 113, 14),
 (266, 178, 112, 14),
 (267, 178, 111, 14),
-(268, 178, 108, 14),
 (269, 178, 105, 14),
 (270, 178, 106, 14),
 (271, 178, 103, 14),
@@ -1250,9 +1347,7 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (278, 178, 95, 14),
 (279, 178, 94, 14),
 (280, 178, 76, 14),
-(281, 178, 107, 14),
 (282, 178, 110, 14),
-(283, 178, 109, 14),
 (284, 178, 99, 14),
 (285, 178, 96, 14),
 (286, 178, 75, 14),
@@ -1287,7 +1382,6 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (315, 180, 113, 19),
 (316, 180, 112, 19),
 (317, 180, 111, 19),
-(318, 180, 108, 19),
 (319, 180, 105, 19),
 (320, 180, 106, 19),
 (321, 180, 103, 19),
@@ -1300,9 +1394,7 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (328, 180, 95, 19),
 (329, 180, 94, 19),
 (330, 180, 76, 19),
-(331, 180, 107, 19),
 (332, 180, 110, 19),
-(333, 180, 109, 19),
 (334, 180, 99, 19),
 (335, 180, 96, 19),
 (336, 180, 75, 19),
@@ -1447,7 +1539,31 @@ INSERT INTO `teacher_class_student` (`teacher_class_student_id`, `teacher_class_
 (570, 206, 156, 18),
 (571, 206, 157, 18),
 (572, 206, 158, 18),
-(573, 206, 159, 18);
+(573, 206, 159, 18),
+(574, 207, 113, 9),
+(575, 207, 112, 9),
+(576, 207, 111, 9),
+(577, 207, 105, 9),
+(578, 207, 106, 9),
+(579, 207, 103, 9),
+(580, 207, 104, 9),
+(581, 207, 100, 9),
+(582, 207, 101, 9),
+(583, 207, 102, 9),
+(584, 207, 97, 9),
+(585, 207, 98, 9),
+(586, 207, 95, 9),
+(587, 207, 94, 9),
+(588, 207, 76, 9),
+(589, 207, 110, 9),
+(590, 207, 99, 9),
+(591, 207, 96, 9),
+(592, 207, 75, 9),
+(593, 207, 74, 9),
+(594, 207, 73, 9),
+(595, 207, 72, 9),
+(596, 207, 71, 9),
+(597, 207, 234, 9);
 
 -- --------------------------------------------------------
 
@@ -1472,7 +1588,20 @@ CREATE TABLE `teacher_notification` (
 INSERT INTO `teacher_notification` (`teacher_notification_id`, `teacher_class_id`, `notification`, `date_of_notification`, `link`, `student_id`, `assignment_id`) VALUES
 (15, 160, 'Submit Assignment file name <b>my_assginment</b>', '2013-11-25 10:39:52', 'view_submit_assignment.php', 93, 16),
 (17, 161, 'Submit Assignment file name <b>q</b>', '2013-11-25 15:54:19', 'view_submit_assignment.php', 71, 17),
-(19, 196, 'Submit Assignment file name <b>test</b>', '2020-12-31 18:56:28', 'view_submit_assignment.php', 111, 41);
+(19, 196, 'Submit Assignment file name <b>test</b>', '2020-12-31 18:56:28', 'view_submit_assignment.php', 111, 41),
+(20, 196, 'Submit Assignment file name <b>assign</b>', '2021-01-01 10:21:51', 'view_submit_assignment.php', 111, 32),
+(21, 196, 'Submit Assignment file name <b>assign</b>', '2021-01-01 10:58:22', 'view_submit_assignment.php', 111, 43),
+(22, 196, 'Submit Assignment file name <b>sdsd</b>', '2021-01-01 11:30:11', 'view_submit_assignment.php', 111, 45),
+(23, 196, 'Submit Assignment file name <b>asss</b>', '2021-01-01 11:43:32', 'view_submit_assignment.php', 111, 47),
+(24, 196, 'Submit Assignment file name <b>hgggg</b>', '2021-01-01 12:23:49', 'view_submit_assignment.php', 111, 55),
+(25, 196, 'Submit Assignment file name <b>assign</b>', '2021-01-01 12:27:09', 'view_submit_assignment.php', 137, 55),
+(26, 196, 'Submit Assignment file name <b>52</b>', '2021-01-01 16:58:59', 'view_submit_assignment.php', 111, 55),
+(27, 196, 'Submit Assignment file name <b>hgggg</b>', '2021-01-01 17:00:58', 'view_submit_assignment.php', 111, 55),
+(28, 196, 'Submit Assignment file name <b>assign</b>', '2021-01-01 17:03:41', 'view_submit_assignment.php', 111, 55),
+(29, 196, 'Submit Assignment file name <b>suhaKJASDH</b>', '2021-01-01 17:08:27', 'view_submit_assignment.php', 111, 55),
+(30, 196, 'Submit Assignment file name <b>asda</b>', '2021-01-01 17:14:59', 'view_submit_assignment.php', 111, 55),
+(31, 196, 'Submit Assignment file name <b>assignment</b>', '2021-01-02 11:42:45', 'view_submit_assignment.php', 111, 55),
+(32, 196, 'Submit Assignment file name <b>assignment</b>', '2021-01-02 11:56:43', 'view_submit_assignment.php', 111, 55);
 
 -- --------------------------------------------------------
 
@@ -1508,17 +1637,21 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `firstname` varchar(100) NOT NULL,
-  `lastname` varchar(100) NOT NULL
+  `lastname` varchar(100) NOT NULL,
+  `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `firstname`, `lastname`) VALUES
-(13, 'teph', 'teph', 'Stephanie', 'villanueva'),
-(14, 'jkev', 'jkev', 'john kevin', 'lorayna'),
-(15, 'admin', 'admin', 'admin', 'admin');
+INSERT INTO `users` (`user_id`, `username`, `password`, `firstname`, `lastname`, `did`) VALUES
+(13, 'teph', 'teph', 'Stephanie', 'villanueva', 0),
+(14, 'jkev', 'jkev', 'john kevin', 'lorayna', 0),
+(15, 'admin', 'admin', 'admin', 'admin', 0),
+(16, 'udayptl9', 'testing123', 'Uday', 'Patil', 9),
+(17, 'agasar123', 'testing123', 'Vishal', 'Agasar', 5),
+(18, 'csAdmin', 'testing123', 'csAdmin', 'cdAdmin', 4);
 
 -- --------------------------------------------------------
 
@@ -1604,48 +1737,68 @@ INSERT INTO `user_log` (`user_log_id`, `username`, `login_date`, `logout_date`, 
 (63, 'jkev', '2014-01-16 14:42:02', '2014-02-13 11:19:36', 14),
 (64, 'jkev', '2014-01-17 09:16:17', '2014-02-13 11:19:36', 14),
 (65, 'jkev', '2014-01-17 13:25:51', '2014-02-13 11:19:36', 14),
-(66, 'admin', '2014-01-17 14:41:30', '2020-12-26 12:55:42', 15),
-(67, 'admin', '2014-01-17 15:56:32', '2020-12-26 12:55:42', 15),
-(68, 'admin', '2014-01-26 17:45:31', '2020-12-26 12:55:42', 15),
-(69, 'admin', '2014-02-13 10:45:17', '2020-12-26 12:55:42', 15),
-(70, 'admin', '2014-02-13 11:05:27', '2020-12-26 12:55:42', 15),
+(66, 'admin', '2014-01-17 14:41:30', '2021-01-07 21:09:50', 15),
+(67, 'admin', '2014-01-17 15:56:32', '2021-01-07 21:09:50', 15),
+(68, 'admin', '2014-01-26 17:45:31', '2021-01-07 21:09:50', 15),
+(69, 'admin', '2014-02-13 10:45:17', '2021-01-07 21:09:50', 15),
+(70, 'admin', '2014-02-13 11:05:27', '2021-01-07 21:09:50', 15),
 (71, 'jkev', '2014-02-13 11:16:48', '2014-02-13 11:19:36', 14),
-(72, 'admin', '2014-02-13 11:55:36', '2020-12-26 12:55:42', 15),
-(73, 'admin', '2014-02-13 12:32:38', '2020-12-26 12:55:42', 15),
-(74, 'admin', '2014-02-13 12:52:05', '2020-12-26 12:55:42', 15),
-(75, 'admin', '2014-02-13 13:04:35', '2020-12-26 12:55:42', 15),
+(72, 'admin', '2014-02-13 11:55:36', '2021-01-07 21:09:50', 15),
+(73, 'admin', '2014-02-13 12:32:38', '2021-01-07 21:09:50', 15),
+(74, 'admin', '2014-02-13 12:52:05', '2021-01-07 21:09:50', 15),
+(75, 'admin', '2014-02-13 13:04:35', '2021-01-07 21:09:50', 15),
 (76, 'jkev', '2014-02-13 14:35:27', '', 14),
-(77, 'admin', '2014-02-20 09:40:39', '2020-12-26 12:55:42', 15),
-(78, 'admin', '2014-02-20 09:42:21', '2020-12-26 12:55:42', 15),
-(79, 'admin', '2014-02-27 22:40:15', '2020-12-26 12:55:42', 15),
-(80, 'admin', '2014-02-28 13:12:52', '2020-12-26 12:55:42', 15),
-(81, 'admin', '2014-04-02 17:27:47', '2020-12-26 12:55:42', 15),
-(82, 'admin', '2014-04-03 15:29:38', '2020-12-26 12:55:42', 15),
-(83, 'admin', '2014-06-15 12:31:51', '2020-12-26 12:55:42', 15),
-(84, 'Admin', '2020-12-21 08:32:51', '2020-12-26 12:55:42', 15),
-(85, 'admin', '2020-12-21 08:48:23', '2020-12-26 12:55:42', 15),
-(86, 'admin', '2020-12-24 21:29:17', '2020-12-26 12:55:42', 15),
-(87, 'admin', '2020-12-26 00:38:43', '2020-12-26 12:55:42', 15),
-(88, 'admin', '2020-12-26 00:52:35', '2020-12-26 12:55:42', 15),
-(89, 'admin', '2020-12-26 10:48:35', '2020-12-26 12:55:42', 15),
-(90, 'admin', '2020-12-26 11:11:36', '2020-12-26 12:55:42', 15),
-(91, 'admin', '2020-12-26 12:41:02', '2020-12-26 12:55:42', 15),
-(92, 'admin', '2020-12-26 12:55:29', '2020-12-26 12:55:42', 15),
-(93, 'admin', '2020-12-28 12:53:41', '', 15),
-(94, 'admin', '2020-12-28 16:26:03', '', 15),
-(95, 'admin', '2020-12-29 09:12:14', '', 15),
-(96, 'admin', '2020-12-29 09:32:40', '', 15),
-(97, 'admin', '2020-12-29 15:46:16', '', 15),
-(98, 'admin', '2020-12-31 14:41:00', '', 15),
-(99, 'admin', '2020-12-31 15:52:19', '', 15),
-(100, 'admin', '2020-12-31 16:09:30', '', 15),
-(101, 'admin', '2020-12-31 17:00:25', '', 15),
-(102, 'admin', '2020-12-31 17:02:43', '', 15),
-(103, 'admin', '2020-12-31 17:13:31', '', 15),
-(104, 'admin', '2020-12-31 17:24:03', '', 15),
-(105, 'admin', '2020-12-31 17:26:59', '', 15),
-(106, 'admin', '2020-12-31 17:28:52', '', 15),
-(107, 'admin', '2020-12-31 17:53:58', '', 15);
+(77, 'admin', '2014-02-20 09:40:39', '2021-01-07 21:09:50', 15),
+(78, 'admin', '2014-02-20 09:42:21', '2021-01-07 21:09:50', 15),
+(79, 'admin', '2014-02-27 22:40:15', '2021-01-07 21:09:50', 15),
+(80, 'admin', '2014-02-28 13:12:52', '2021-01-07 21:09:50', 15),
+(81, 'admin', '2014-04-02 17:27:47', '2021-01-07 21:09:50', 15),
+(82, 'admin', '2014-04-03 15:29:38', '2021-01-07 21:09:50', 15),
+(83, 'admin', '2014-06-15 12:31:51', '2021-01-07 21:09:50', 15),
+(84, 'Admin', '2020-12-21 08:32:51', '2021-01-07 21:09:50', 15),
+(85, 'admin', '2020-12-21 08:48:23', '2021-01-07 21:09:50', 15),
+(86, 'admin', '2020-12-24 21:29:17', '2021-01-07 21:09:50', 15),
+(87, 'admin', '2020-12-26 00:38:43', '2021-01-07 21:09:50', 15),
+(88, 'admin', '2020-12-26 00:52:35', '2021-01-07 21:09:50', 15),
+(89, 'admin', '2020-12-26 10:48:35', '2021-01-07 21:09:50', 15),
+(90, 'admin', '2020-12-26 11:11:36', '2021-01-07 21:09:50', 15),
+(91, 'admin', '2020-12-26 12:41:02', '2021-01-07 21:09:50', 15),
+(92, 'admin', '2020-12-26 12:55:29', '2021-01-07 21:09:50', 15),
+(93, 'admin', '2020-12-28 12:53:41', '2021-01-07 21:09:50', 15),
+(94, 'admin', '2020-12-28 16:26:03', '2021-01-07 21:09:50', 15),
+(95, 'admin', '2020-12-29 09:12:14', '2021-01-07 21:09:50', 15),
+(96, 'admin', '2020-12-29 09:32:40', '2021-01-07 21:09:50', 15),
+(97, 'admin', '2020-12-29 15:46:16', '2021-01-07 21:09:50', 15),
+(98, 'admin', '2020-12-31 14:41:00', '2021-01-07 21:09:50', 15),
+(99, 'admin', '2020-12-31 15:52:19', '2021-01-07 21:09:50', 15),
+(100, 'admin', '2020-12-31 16:09:30', '2021-01-07 21:09:50', 15),
+(101, 'admin', '2020-12-31 17:00:25', '2021-01-07 21:09:50', 15),
+(102, 'admin', '2020-12-31 17:02:43', '2021-01-07 21:09:50', 15),
+(103, 'admin', '2020-12-31 17:13:31', '2021-01-07 21:09:50', 15),
+(104, 'admin', '2020-12-31 17:24:03', '2021-01-07 21:09:50', 15),
+(105, 'admin', '2020-12-31 17:26:59', '2021-01-07 21:09:50', 15),
+(106, 'admin', '2020-12-31 17:28:52', '2021-01-07 21:09:50', 15),
+(107, 'admin', '2020-12-31 17:53:58', '2021-01-07 21:09:50', 15),
+(108, 'admin', '2020-12-31 20:06:27', '2021-01-07 21:09:50', 15),
+(109, 'admin', '2020-12-31 20:34:00', '2021-01-07 21:09:50', 15),
+(110, 'admin', '2021-01-01 10:18:33', '2021-01-07 21:09:50', 15),
+(111, 'admin', '2021-01-01 11:20:11', '2021-01-07 21:09:50', 15),
+(112, 'admin', '2021-01-04 18:06:37', '2021-01-07 21:09:50', 15),
+(113, 'admin', '2021-01-06 18:38:07', '2021-01-07 21:09:50', 15),
+(114, 'admin', '2021-01-07 01:26:27', '2021-01-07 21:09:50', 15),
+(115, 'admin', '2021-01-07 16:24:28', '2021-01-07 21:09:50', 15),
+(116, 'admin', '2021-01-07 16:45:19', '2021-01-07 21:09:50', 15),
+(117, 'admin', '2021-01-07 19:24:02', '2021-01-07 21:09:50', 15),
+(118, 'admin', '2021-01-07 19:38:43', '2021-01-07 21:09:50', 15),
+(119, 'udayptl9', '2021-01-07 19:49:34', '2021-01-07 20:41:31', 16),
+(120, 'admin', '2021-01-07 20:13:32', '2021-01-07 21:09:50', 15),
+(121, 'agasar123', '2021-01-07 20:14:13', '2021-01-07 20:41:12', 17),
+(122, 'udayptl9', '2021-01-07 20:41:20', '2021-01-07 20:41:31', 16),
+(123, 'admin', '2021-01-07 20:41:35', '2021-01-07 21:09:50', 15),
+(124, 'csAdmin', '2021-01-07 20:42:34', '2021-01-07 20:57:19', 18),
+(125, 'udayptl9', '2021-01-07 20:57:37', '', 16),
+(126, 'admin', '2021-01-07 21:04:45', '2021-01-07 21:09:50', 15),
+(127, 'udayptl9', '2021-01-07 21:09:59', '', 16);
 
 --
 -- Indexes for dumped tables
@@ -1668,6 +1821,12 @@ ALTER TABLE `answer`
 --
 ALTER TABLE `assignment`
   ADD PRIMARY KEY (`assignment_id`);
+
+--
+-- Indexes for table `attendence`
+--
+ALTER TABLE `attendence`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `class`
@@ -1869,7 +2028,7 @@ ALTER TABLE `user_log`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `answer`
@@ -1881,7 +2040,13 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `assignment`
 --
 ALTER TABLE `assignment`
-  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT for table `attendence`
+--
+ALTER TABLE `attendence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -1899,7 +2064,7 @@ ALTER TABLE `class_quiz`
 -- AUTO_INCREMENT for table `class_subject_overview`
 --
 ALTER TABLE `class_subject_overview`
-  MODIFY `class_subject_overview_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `class_subject_overview_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `content`
@@ -1911,7 +2076,7 @@ ALTER TABLE `content`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `course_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -1923,7 +2088,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `edit_profile`
 --
 ALTER TABLE `edit_profile`
-  MODIFY `profile_id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `profile_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `event`
@@ -1935,7 +2100,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -1953,7 +2118,7 @@ ALTER TABLE `message_sent`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `notification_read`
@@ -1989,13 +2154,13 @@ ALTER TABLE `school_year`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `student_assignment`
 --
 ALTER TABLE `student_assignment`
-  MODIFY `student_assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `student_backpack`
@@ -2031,7 +2196,7 @@ ALTER TABLE `teacher_backpack`
 -- AUTO_INCREMENT for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-  MODIFY `teacher_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `teacher_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT for table `teacher_class_announcements`
@@ -2043,13 +2208,13 @@ ALTER TABLE `teacher_class_announcements`
 -- AUTO_INCREMENT for table `teacher_class_student`
 --
 ALTER TABLE `teacher_class_student`
-  MODIFY `teacher_class_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=574;
+  MODIFY `teacher_class_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=598;
 
 --
 -- AUTO_INCREMENT for table `teacher_notification`
 --
 ALTER TABLE `teacher_notification`
-  MODIFY `teacher_notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `teacher_notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `teacher_shared`
@@ -2061,13 +2226,13 @@ ALTER TABLE `teacher_shared`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
-  MODIFY `user_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `user_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
