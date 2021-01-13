@@ -1,3 +1,8 @@
+<?php 
+	if($_SESSION['department'] != 0) {
+		echo '<script>window.location.href = "logout.php"</script>';
+	} 
+?>
    <div class="row-fluid">
                         <!-- block -->
                         <div class="block">

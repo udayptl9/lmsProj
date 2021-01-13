@@ -251,6 +251,7 @@
 						student['fname'] = fname;
 						student['lname'] = lname;
 						student['usn'] = usn;
+						student['did'] = <?php echo $_SESSION['department']; ?>,
 						student['dob'] = Number(dob);
 						student['classId'] = Number(document.querySelector('.class_id_sheet').value);
 						students.push(student);

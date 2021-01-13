@@ -12,10 +12,11 @@
 		</script>
 	  <?php
 	  } else {
-	  	$checkSql = mysqli_query($conn, "SELECT `fname`, `maxmarks` FROM `assignment` WHERE (`assignment_id` = $post_id)");
+	  	$checkSql = mysqli_query($conn, "SELECT `fname`, `maxmarks`, `qmaxmarks` FROM `assignment` WHERE (`assignment_id` = $post_id)");
 	  	while($row=mysqli_fetch_array($checkSql)) {
 	  		$filename = $row['fname'];
 	  		$maxmarks = $row['maxmarks'];
+	  		$queMarks = $row['qmaxmarks'];
 	  	}
 	  	$checkSql = mysqli_query($conn, "SELECT `firstname`, `lastname`, `username`, `student_id` FROM `student` WHERE (`student_id` = $student_id)");
 	  	while($row=mysqli_fetch_array($checkSql)) {
@@ -53,7 +54,7 @@
                             <div class="controls">
                                 <input type="text"  name="name" disabled value="<?php echo $firstname." ".$lastname; ?>" Placeholder="File Name"  class="input">
                             </div>
-                        </div>
+                        </div> 	
                         <div class="control-group">
                       		<label>USN:</label>
                             <div class="controls">
@@ -75,27 +76,36 @@
                         <div class="control-group">
 											<label class="control-label" for="marksobtained">Marks Obtained</label>
 											<div class="form-group">
-											<table class="table table-bordered" id="dynamic_field">
 											<div class='marksobtained'>
-												<input type="number" value=0 class="marksobtained totalMarks" name="marksobtained" id="marksobtained" placeholder="Total Marks"><button  style="background: green; color: white; font-weight: bold; margin-left:6px;" class="detail_add">Add Detail</button>
+												<input type="number" disabled value=0 class="marksobtained totalMarks" name="marksobtained" id="marksobtained" placeholder="Total Marks">
 											</div>
-										</table>
 										</div>
 									</div>
                          	
                         <div class="control-group">
                             <div class="controls">
 
-                                <button name="Upload" type="submit" value="Upload" class="btn btn-success" /><i class="icon-upload-alt"></i>&nbsp;Upload</button>
+                                <button name="Upload" type="submit" value="Upload" class="btn btn-success uploadInternal" /><i class="icon-upload-alt"></i>&nbsp;Upload</button>
                             </div>
                         </div>
                     </form>
                     <script>
 									let index = 0;
 									var inputs = [];
-									document.querySelector('.detail_add').addEventListener('click', function(event){
-										event.preventDefault();
-										addInput();
+									const qMarks = JSON.parse('<?php print_r($queMarks); ?>');
+									document.querySelector('.marksobtained').innerHTML += `
+										<table style="text-align: center; border-collapse: coolapse;" border=1>
+											<thead>
+												<tr>
+													<th style='padding: 5px;'>Question No</th>
+													<th style='padding: 5px;'>Marks Obtained</th>
+												</tr>
+											</thead>
+											<tbody class='marksObtainedTable'></tbody>
+										</table>
+									`;
+									qMarks['questions'].forEach(question=>{
+										addInput(question.questionNo, question.queMaxMarks);
 									})
 									document.querySelector('.marksForm').addEventListener('submit', function(event) {
 										event.preventDefault();
@@ -103,7 +113,7 @@
 										let marksFinal = [];
 										document.querySelectorAll('.marksDiv').forEach(mark=>{
 											let student = {};
-											student['questionNo'] = mark.querySelector('.questionNo').value;
+											student['questionNo'] = mark.querySelector('.questionNo').innerHTML;
 											student['marksObtained'] = mark.querySelector('.enteredMarks').value;
 											marksFinal.push(student);
 										})
@@ -128,20 +138,26 @@
 											}
 										})
 									})
-									function addInput() {
-										var myDiv = document.createElement("div");
+									function addInput(questionNo=1, maxmarks=0) {
+										var myDiv = document.createElement("tr");
+										myDiv.classList.add('marksDiv');
 	 									myDiv.innerHTML = `
-	 										<div class='marksobtained_${index} marksDiv'>
-											<br>
-											<input type="text" style="width: 25%; display: inline;"   class="marksobtained questionNo" size="30" name="marksobtained" placeholder="Q.No"><input style="width: 25%; display: inline; margin-left:10px;" type="number" class="marksobtained enteredMarks" name="marksobtained" placeholder="Marks" value=0><button style="margin-left:10px;"class='removeIcon' onclick="removeInput('${index}')">Delete</button>
-											</div>
+	 										<td class='questionNo'>${questionNo}</td>
+	 										<td><input type='text' class='enteredMarks' value='0' style='width: 25px;'>   /<span class='maxmarks'>${maxmarks}</span></td>
 										`;
-										document.querySelector('.marksobtained').appendChild(myDiv);
+										document.querySelector('.marksObtainedTable').appendChild(myDiv);
 										index++;
 										inputs = document.querySelectorAll('.enteredMarks');
 										inputs.forEach((enter)=>{
 											enter.addEventListener('keyup', function(event) {
 												event.preventDefault();
+												if(event.target.value > Number(event.target.parentElement.querySelector('.maxmarks').innerHTML)) {
+													event.target.style.border = '3px solid red';
+													document.querySelector('.uploadInternal').style.display = 'none';
+												} else {
+													event.target.style.border = '1px solid #ccc';
+													document.querySelector('.uploadInternal').style.display = 'block';
+												}
 												document.querySelector('.totalMarks').value = 0;
 												document.querySelectorAll('.enteredMarks').forEach(temp=>{
 													document.querySelector('.totalMarks').value = Number(document.querySelector('.totalMarks').value) + Number(temp.value);
@@ -150,15 +166,6 @@
 										})
 										return false;
 
-									}
-									function removeInput(index) {
-										document.querySelector(`.marksobtained_${index}`).remove();
-										inputs = document.querySelectorAll('.enteredMarks');
-										document.querySelector('.totalMarks').value = 0;
-										document.querySelectorAll('.enteredMarks').forEach(temp=>{
-											document.querySelector('.totalMarks').value = Number(document.querySelector('.totalMarks').value) + Number(temp.value);
-										})
-										return false;
 									}
 									document.querySelector('.marksForm').addEventListener('submit', function(event){
 										event.preventDefault();

@@ -39,6 +39,7 @@ if(isset($_POST['action'])) {
         $data = json_decode($_POST['data']);
         foreach ($data as &$value) {
             $un = $value->usn;
+            $did = $value->did;
             $fn = $value->fname;
             $ln = $value->lname;
             $class_id = $value->classId;
@@ -49,7 +50,7 @@ if(isset($_POST['action'])) {
             if(mysqli_num_rows($checkSql) > 0) {
                 array_push($response, $un);
             } else {
-                $sql = "INSERT INTO `student`(`firstname`, `lastname`, `dob`, `class_id`, `username`, `password`, `location`, `status`, `per_no`, `gua_no`) VALUES ('$fn','$ln','$dob',$class_id,'$un','','','Unregistered','','')";
+                $sql = "INSERT INTO `student`(`firstname`, `lastname`, `dob`, `class_id`, `did`, `username`, `password`, `location`, `status`, `per_no`, `gua_no`) VALUES ('$fn','$ln','$dob',$class_id, $did, '$un','','','Unregistered','','')";
                 $result = mysqli_query($conn,$sql);
             }
         }    

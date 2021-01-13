@@ -69,20 +69,39 @@
     }
     .pastAttendence {
       display: inline-block;
+      max-width: 95%;
+      overflow-x: auto;
+    }
+    .attendenceTable {
+      min-width: 100%;
+    }
+    .attendenceTable th, .attendenceTable td {
+      padding: 10px;
+      text-align: center;
     }
   </style>
   <?php include('navbar_teacher.php'); ?>
+
   <div class="container-fluid">
     <div class="row-fluid">
       <?php include('class_sidebar.php'); ?>
+      <?php include('my_students_breadcrums.php'); ?>
       <div class="span9" id="content">
         <div class="row-fluid">
-          <div class="pull-right">
-            <h4 style='display: inline-block;'>Attendence: <span class='attendenceOf'></span></h4>     <span class='historyAttendenece' style='display: inline-block;'>History</span>
+          <div class="pull-left">
+            <h4 style='display: inline-block; bottom:30%;'>Attendence: <span class='attendenceOf'></span></h4>     
+            <div class="pull-right">
+            <span class='historyAttendenece' style='display:inline-block; margin-left:650px;'>
+						  <input type="date" id="attendencecal" name="cal">
+					</span>
+				</div>
+
           </div>
-          <?php include('my_students_breadcrums.php'); ?>
+          
           <!-- block -->
+          <br>
           <div id="block_bg" class="block">
+          </br>
             <div class="navbar navbar-inner block-header">
               <div id="" class="muted pull-right">
                 <?php 
@@ -94,6 +113,7 @@
                 Number of Students: <span class="badge badge-info"><?php echo $count_my_student; ?></span>
               </div>
             </div>
+
             <div class="block-content collapse in todayAttendence">
               <div class="span12 attendenceTableDiv inline">
                   <?php
@@ -121,8 +141,8 @@
               </div>
             </div>
             <div class="block-content collapse in pastAttendence">
-              <div class="span12">
-                      <table>
+              <div class="span12" style='width: 100%; max-width: 100%; overflow-x: auto;'>
+                      <table class='attendenceTable'>
                         <thead>
                           <tr class='attendenecsHeading'>
                             <th>Sl No</th>                          
@@ -135,7 +155,7 @@
                       </table>
                   <?php
                     $teacher_id = $_SESSION['id'];
-                    $attendences = mysqli_query($conn, "SELECT * FROM attendence WHERE attendence.teacher_id = $teacher_id")or die(mysqli_error());
+                    $attendences = mysqli_query($conn, "SELECT * FROM attendence WHERE attendence.teacher_class_id = $get_id")or die(mysqli_error());
                   ?>
                   <script>
                     let attendences = [];
@@ -148,20 +168,31 @@
                   </script>
                   <?php }?>
                   <script>
+                    let index1=0;
                     attendences.forEach(attend=>{
                       const data = JSON.parse(attend['attendence']);
                       document.querySelector('.attendenecsHeading').innerHTML += `<th>${attend['date']}</th>`
                       let index = 1;
-                      data.forEach(i=>{
-                        document.querySelector('.attendenceBody').innerHTML += `
-                          <tr class="attendenceDate">
-                            <td>${index}</td>
-                            <td>${i['firstname']} ${i['lastname']}</td>
-                            <td>${i['rollNo']}</td>
-                          </tr>
-                        `;
-                        index++;
-                      })
+                      let second = 0;
+                      if(index1==0) {
+                        data.forEach(i=>{
+                          document.querySelector('.attendenceBody').innerHTML += `
+                            <tr class="attendenceDate">
+                              <td>${index}</td>
+                              <td>${i['firstname']} ${i['lastname']}</td>
+                              <td>${i['rollNo']}</td>
+                              <td>${i['attendence']}</td>
+                            </tr>
+                          `;
+                          index++;
+                        })
+                        index1++;
+                      } else {
+                        data.forEach(i=>{
+                          document.querySelectorAll('.attendenceDate')[second].innerHTML += `<td>${i['attendence']}</td>`;
+                          second++;
+                        })
+                      }
                     })
                   </script>
               </div>
@@ -172,9 +203,18 @@
       </div>
     </div>
     <script>
+      function changeDate(date){
+      	document.querySelector('.attendenceOf').innerHTML = date;
+      }
       var today = new Date();
-      var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-      document.querySelector('.attendenceOf').innerHTML = date;
+      var date = today.getDate() + '/' + (today.getMonth() + 1) +'/' + today.getFullYear();
+      changeDate(date);
+      document.querySelector('#attendencecal').addEventListener('change', function(event) {
+      	event.preventDefault();
+      	const changedDate = event.target.value;
+      	date = changedDate.split("-")[2] + '/' + changedDate.split("-")[1] + '/' + changedDate.split("-")[0]
+      	changeDate(date); 
+      })
       document.querySelectorAll('.attendenceAvatar').forEach(avatar=>{
         avatar.addEventListener('click', function(event) {
           event.preventDefault();
@@ -188,6 +228,7 @@
           date: date,
           class_id: studentsAll[0].querySelector('.class_id').innerHTML,
           teacher_id: <?php echo $_SESSION['id']; ?>,
+          teacher_class_id: <?php echo $_GET['id']; ?>,
           attendence: []
         };
         studentsAll.forEach(student=>{
@@ -208,6 +249,7 @@
           data: {
             class_id: attendenceFinal['class_id'],
             teacher_id: attendenceFinal['teacher_id'],
+            teacher_class_id: attendenceFinal['teacher_class_id'],
             date: attendenceFinal['date'],
             attendence: JSON.stringify(attendenceFinal['attendence']),
           }, beforeSend: function() {

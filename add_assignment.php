@@ -51,15 +51,44 @@
 														<input type="text" name="maxmarks" Placeholder="Max Marks"  class="input">
 													</div>
 												</div>
-                
+												<div class="control-group">
+													<div class="controls">
+														<input type="number" Placeholder="No Of Questions"  class="noOfQuestions">
+														<a class='btn btn-info addMarks'>Go</a>
+													</div>
+												</div>
+            								<div class='questions'> 
+            								</div>    
 					
 											<script>
+			document.querySelector('.addMarks').addEventListener('click', function(event){
+				event.preventDefault();
+				let maindiv = document.querySelector('.questions');
+				const noOfQuestions = Number(document.querySelector('.noOfQuestions').value);
+				maindiv.innerHTML = "";
+				for(let i=0;i<noOfQuestions;i++ ){
+					maindiv.innerHTML+=`
+							<div class='questionDiv'>
+								<input class='questionNo' type="number" style='width: 40%; display: inline;' Placeholder="que No" value='${i+1}'>
+								<input class='queMaxMarks' type="number" style='width: 40%; display: inline;' Placeholder="max marks">
+							</div>
+					`;
+				} 
+			})
 			jQuery(document).ready(function($){
 				$("#add_downloadble").submit(function(e){
 					$.jGrowl("Uploading File Please Wait......", { sticky: true });
 					e.preventDefault();
 					var _this = $(e.target);
+					let allQuestions = {'questions': []};
+					document.querySelectorAll('.questionDiv').forEach(question=>{
+						let questionDict = {};
+						questionDict['questionNo'] = question.querySelector('.questionNo').value;
+						questionDict['queMaxMarks'] = question.querySelector('.queMaxMarks').value;
+						allQuestions['questions'].push(questionDict);
+					})
 					var formData = new FormData($(this)[0]);
+					formData.append('questions', JSON.stringify(allQuestions));
 					$.ajax({
 						type: "POST",
 						url: "add_assignment_save.php",
