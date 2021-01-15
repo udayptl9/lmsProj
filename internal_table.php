@@ -56,13 +56,12 @@
        		document.querySelector('.addinternalsubmit').addEventListener('click', function(event) {
        			event.preventDefault();
 	       		let th = document.createElement('th');
-	       		th.classList.add('newIA');
 	       		th.innerHTML = `${document.querySelector('.internalName').value} (${document.querySelector('.internalName1').value})`;
 	       		document.querySelector('.headings').appendChild(th);
 	       		document.querySelectorAll('.studentrows').forEach(row=>{
 	       			let td = document.createElement('td');
 	       			td.classList.add('newMark');
-	       			td.innerHTML = `<input type='number' placeholder='marks' class='marksEdited' style='width: 50px;'>`;
+	       			td.innerHTML = `<input type='number' placeholder='marks' class='marksEdited' style='width: 50px;'><span class='newIA' style='display: None;'>${document.querySelector('.internalName').value} (${document.querySelector('.internalName1').value})</span>`;
 	       			row.appendChild(td);
 	       		})
 	       		totalIAs++;
@@ -97,50 +96,47 @@
 			 	document.querySelector('.addinternalpopup').classList.remove('internalIn');
 			 })
 			document.querySelector('.saveinternal').addEventListener('click', function(event) {
-    				event.preventDefault();
-    				let students = [];
-    				const totalStudentsDiv = document.querySelectorAll('.studentrows');
-    				for(let i=0; i<totalStudentsDiv.length; i++) {
-    					let student = {};
-    					student['Name'] = totalStudentsDiv[i].querySelector('.studentName').innerHTML;
-    					student['USN'] = totalStudentsDiv[i].querySelector('.studentUSN').innerHTML;
-    					student['class'] = '<?php echo $get_id; ?>';
-    					student['IAs'] = [];
-    					const IAs = document.querySelectorAll('.newMark');
-    					for(let j=0; j<IAs.length; i++) {
-    						let studentIA = {};
-    						studentIA['IAName'] = document.querySelectorAll('.newIA')[j].innerHTML;
-    						studentIA['IAMark'] = IAs.value;
-    						student['IAs'].push(studentIA);
-    					}
-    					students.push[student];
-    				}
-
-    				console.log(students)
-    				syllabusFinal = syllabus;
-    				$.ajax({
-    					url: 'syllabusFinal.php',
-    					type:'POST',
-    					data: {
-    						syllabus: JSON.stringify(syllabusFinal),
-    						id: <?php echo $get_id ?>
-    					},
-    					beforeSend: function(){
-    						console.log('saving');
-    					},
-    					success:function(response){
-    						try{
-    							if(JSON.parse(response).text){
-    								window.location.reload();
-    							} else {
-    								console.log(JSON.parse(response));
-    							}
-    						} catch(error){
-    							console.log(error);
-    						}
-    					}
-    				})
-    			})
+				event.preventDefault();
+				let students = {'students': []};
+				const totalStudentsDiv = document.querySelectorAll('.studentrows');
+				for(let i=0; i<totalStudentsDiv.length; i++) {
+					let student = {};
+					student['Name'] = totalStudentsDiv[i].querySelector('.studentName').innerHTML;
+					student['USN'] = totalStudentsDiv[i].querySelector('.studentUSN').innerHTML;
+					student['class'] = '<?php echo $get_id; ?>';
+					student['IAs'] = [];
+					const IAs = document.querySelectorAll('.newMark');
+					for(let j=0; j<IAs.length; j++) {
+						let studentIA = {};
+						studentIA['IAName'] = document.querySelectorAll('.newIA')[j].innerHTML;
+						studentIA['IAMark'] = IAs[j].querySelector('.marksEdited').value;
+						student['IAs'].push(studentIA);
+					}
+					students['students'].push[student];
+				}
+				$.ajax({
+					url: 'internalfinal.php',
+					type:'POST',
+					data: {
+						syllabus: JSON.stringify(students),
+						id: <?php echo $get_id ?>
+					},
+					beforeSend: function(){
+						console.log(students);
+					},
+					success:function(response){
+						try{
+							if(JSON.parse(response).text){
+								window.location.reload();
+							} else {
+								console.log(JSON.parse(response));
+							}
+						} catch(error){
+							console.log(error);
+						}
+					}
+				})
+			})
 
 	</script>
 

@@ -91,10 +91,14 @@
           <div class="pull-left">
             <h4 style='display: inline-block; bottom:30%;'>Attendence: <span class='attendenceOf'></span></h4>     
             <div class="pull-right">
-            <span class='historyAttendenece' style='display:inline-block; margin-left:650px;'>
+            <span class='historyAttendenece' style='display:inline-block; margin-left:550px;'>
 						  <input type="date" id="attendencecal" name="cal">
 					</span>
+            	<a onclick="window.open('print_attendence.php<?php echo '?id='.$get_id; ?>')"  class="btn btn-success print"style='display:inline-block;margin-left:5px;margin-bottom:10px; '><i class="icon-list"></i>  Print Report</a>
+
+
 				</div>
+
 
           </div>
           

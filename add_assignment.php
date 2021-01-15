@@ -57,8 +57,26 @@
 														<a class='btn btn-info addMarks'>Go</a>
 													</div>
 												</div>
-            								<div class='questions'> 
-            								</div>    
+												<div class='questions'> 
+            								</div>
+												<div class="control-group">
+													<div class="controls">
+														<label>Set Deadline</label>
+														<input type="date"   name="date" style=width:40%;>
+														<input type="time"   name="time" style=width:20%;>
+														
+													</div>
+												</div>
+											<div class="control-group">
+													<div class="controls">
+														<input type="checkbox" id="checkbox" name="checkbox" >
+														<label for="checkbox" style='display:inline;'>Stop taking responses after Deadline</label>
+
+														
+													</div>
+												</div>
+
+            								    
 					
 											<script>
 			document.querySelector('.addMarks').addEventListener('click', function(event){
@@ -94,8 +112,9 @@
 						url: "add_assignment_save.php",
 						data: formData,
 						success: function(html){
-							$.jGrowl("Assignment Successfully Added", { header: 'Assignment Added' });
-							window.location = 'add_assignment.php';
+							console.log(html);
+							//$.jGrowl("Assignment Successfully Added", { header: 'Assignment Added' });
+							//window.location = 'add_assignment.php';
 						},
 						cache: false,
 						contentType: false,
@@ -147,7 +166,7 @@
 												<input id="" class="" name="selector[]" type="checkbox" value="<?php echo $id; ?>">
 											</td>
 											<td><?php echo $row['class_name']; ?></td>
-											<td><?php echo $row['subject_code']; ?></td>                                                                   
+											<td><?php echo $row['subject_code']; ?></td>            
 										</tr>
                          
 						<?php } ?>

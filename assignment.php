@@ -3,6 +3,34 @@
 <?php $get_id = $_GET['id']; ?>
 
     <body>
+    	<style> 
+    	.onchange{
+    		background:red !important;
+    	}
+    </style>
+    <script> 
+
+    	function changeStatus(id, currentStatus) {
+			$.ajax({
+				url: 'changeStatus.php',
+				type: 'POST',
+				data: {
+					id: id,
+					currentStatus: currentStatus,
+				}, beforeSend: function() {
+					console.log("Changing Status");
+
+				}, success: function(response) {
+					if(response) {
+						//window.location.reload();
+						const button = document.querySelector(`.statusButton_${id}`);
+						button.classList.toggle('onchange');
+					}
+				}
+			})
+		}
+    </script>
+
 		<?php include('navbar_teacher.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -34,6 +62,7 @@
 										<thead>
 										        <tr>
 												<th>Date Upload</th>
+												<th>DeadLine</th>
 												<th>File Name</th>
 												<th>Description</th>
 												<th>Max Marks</th>
@@ -46,10 +75,12 @@
 										$query = mysqli_query($conn,"select * FROM assignment where class_id = '$get_id' and teacher_id = '$session_id' order by fdatein DESC ")or die(mysqli_error());
 										while($row = mysqli_fetch_array($query)){
 										$id  = $row['assignment_id'];
+										$dl = $row['deadline_date'];
 										$floc  = $row['floc'];
 									?>                              
 								<tr>
 										 <td><?php echo $row['fdatein']; ?></td>
+										 <td><?php echo "Date:";echo $row['deadline_date']; echo "<br>Time:</br>";echo $row['deadline_time']; ?></td>
                                          <td><?php  echo $row['fname']; ?></td>
                                          <td><?php echo $row['fdesc']; ?></td>
                                          <td><?php echo $row['maxmarks']; ?></td> 
@@ -58,7 +89,18 @@
 										  <form method="post" action="view_submit_assignment.php<?php echo '?id='.$get_id ?>&<?php echo 'post_id='.$id ?>">
 										
 										 <button data-placement="bottom" title="View Student who submit Assignment" id="<?php echo $id; ?>view" class="btn btn-success"><i class="icon-folder-open-alt icon-large"></i></button>
+										 <a class='btn btn-info statusButton_<?php echo $id; ?> <?php if($row['status'] == 1) { echo 'onchange'; } else { echo ''; } ?>' title="Stop Accepting Assignment" onclick="changeStatus(<?php echo $id; ?>, <?php echo $row['status']; ?>)"><i class="icon-folder-open-alt icon-large"></i></a>
 
+										 <?php 
+										 $currentDate = date("d");
+										 $currentMonth = date("m");
+										 $currentYear = date("Y");
+										 if($row['deadline_date'] != '') {
+										 	if(explode('/', $row['deadline_date'])[0] < $currentDate && explode('/', $row['deadline_date'])[1] <= $currentMonth && explode('/', $row['deadline_date'])[2] <= $currentYear) {
+											 	print_r('<script>changeStatus('.$id.', 0)</script>');
+											 }
+										 }
+										  ?>
 										</form>
 										<?php 
 										if ($floc == ""){
@@ -66,7 +108,8 @@
 										?>
 										 <a data-placement="bottom" title="Download" id="<?php echo $id; ?>download"  class="btn btn-info" href="<?php echo $row['floc']; ?>"><i class="icon-download icon-large"></i></a>
 										<?php } ?>
-										 <a data-placement="bottom" title="Remove" id="<?php echo $id; ?>remove"  class="btn btn-danger"  href="#<?php echo $id; ?>" data-toggle="modal"><i class="icon-remove icon-large"></i></a>
+										 <a data-placement="bottom" title="Remove" id="<?php echo $id; ?>remove" class="btn btn-danger"  href="#<?php echo $id; ?>" data-toggle="modal"><i class="icon-remove icon-large"></i></a>
+										 <td> <a href="teacher_graph.php?id=<?php echo $_GET['id']; ?>&assignment_id=<?php echo $row['assignment_id'];?>">Progress graph! </a> </td>
 										 <?php include('delete_assigment_modal.php'); ?>									
 									</td>                                      
 														<script type="text/javascript">
@@ -86,14 +129,16 @@
 															$('#<?php echo $id; ?>view').tooltip('show');
 															$('#<?php echo $id; ?>view').tooltip('hide');
 														});
+														
 														</script>
                                 </tr>
 						 <?php } ?>
+
 										</tbody>
 									</table>
                                 </div>
                             </div>
-                        </div>
+                                                    </div>
                         <!-- /block -->
                     </div>
                 </div>

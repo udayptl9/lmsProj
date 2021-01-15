@@ -50,6 +50,7 @@
 										<thead>
 										        <tr>
 												<th>Date Upload</th>
+												<th>DeadLine</th>
 												<th>File Name</th>
 												<th>Description</th>
 												<th>Max Marks</th>
@@ -68,6 +69,7 @@
 									?>                              
 										<tr>
 										 <td><?php echo $row['fdatein']; ?></td>
+										 <td><?php echo "Date:";echo $row['deadline_date']; echo "<br>Time:</br>";echo $row['deadline_time']; ?></td>
                                          <td><?php  echo $row['fname']; ?></td>
                                          <td><?php echo $row['fdesc']; ?></td>
                                          <td><?php echo $row['maxmarks']; ?></td>                                      

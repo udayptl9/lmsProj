@@ -118,7 +118,7 @@
                         <!-- /block -->
                     </div>
                 </div>
-				<?php include('submit_assignment_sidebar.php') ?>
+				<?php include('submit_assignmentpdf_sidebar.php') ?>
             </div>
 		<?php include('footer.php'); ?>
         </div>

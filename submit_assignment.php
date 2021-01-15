@@ -46,6 +46,7 @@
 									<?php
 										$query1 = mysqli_query($conn,"select * FROM assignment where assignment_id = '$post_id'")or die(mysqli_error());
 										$row1 = mysqli_fetch_array($query1);
+
 									
 									?>
 									<div class="alert alert-info">Submit Assignment in : <?php echo $row1['fname']; ?></div>
@@ -86,7 +87,7 @@
 										 </td>
 										 <?php }else{ ?>
 										 <td></td>
-										 <?php } ?>										 
+										 <?php } ?>									 
                                 </tr>
                          
 						 <?php } ?>
@@ -104,7 +105,23 @@
 
 
                 </div>
-					<?php include('submit_assignment_sidebar.php') ?>
+
+					<?php
+						 $currentDate = date("d");
+						 $currentMonth = date("m");
+						 $currentYear = date("Y");
+						 if($row1['deadline_date'] != '' && $row1['auto_deadline'] == 1) {
+						 	if(explode('/', $row1['deadline_date'])[0] < $currentDate && explode('/', $row1['deadline_date'])[1] <= $currentMonth && explode('/', $row1['deadline_date'])[2] <= $currentYear || $row1['status'] == 1) {
+								echo"Teacher has stopped collecting the assignment";
+							}else{
+								include('submit_assignment_sidebar.php'); 
+							}
+						} else {
+							include('submit_assignment_sidebar.php'); 
+						}
+					?>
+
+					 
 				
             </div>
 		<?php include('footer.php'); ?>

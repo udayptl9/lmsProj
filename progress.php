@@ -43,6 +43,7 @@
 												<th>Description</th>
 											
 												<th>Grade</th>
+												<th>Reports</th>
 												</tr>
 												
 										</thead>
@@ -62,12 +63,14 @@
 										 <td><?php echo $row['fdatein']; ?></td>
                                          <td><?php  echo $row['fname']; ?></td>
                                          <td><?php  echo $row['fdesc']; ?></td>
+                                          
 
                                       
 										 <?php if ($session_id == $student_id){ ?>
                                          <td>
 										 <span class="badge badge-success"><?php echo $row['grade']; ?></span>
 										 </td>
+										 <td><a href="graphs.php?id=<?php echo $_GET['id']; ?>&assignment_id=<?php echo $row['assignment_id'];?>">Progress graph </a> </td>
 										 <?php }else{ ?>
 										 <td></td>
 										 <?php } ?>										 
