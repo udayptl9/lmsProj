@@ -13,7 +13,6 @@ $assignment_id  = $_POST['id'];
 $name  = $_POST['name'];
 $roll_no  = $_POST['rollno'];
 
-
 $get_id = $_POST['get_id'];
 //Function to sanitize values received from the form. Prevents SQL injection
 function clean($str) {

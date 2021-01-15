@@ -27,9 +27,9 @@
 	  		
 	  		$student_id = $row['student_id'];
 	  	}
-	  	$checkSql = mysqli_query($conn, "SELECT `roll_no`,`marks_alloc`,`grade`  FROM `student_assignment` WHERE (`student_id` = $student_id)");
+	  	$checkSql = mysqli_query($conn, "SELECT `roll_no`,`marks_alloc`,`totalmarks`  FROM `student_assignment` WHERE (`student_id` = $student_id)");
 	  	while($row=mysqli_fetch_array($checkSql)) {
-	  		$tm = $row['grade'];
+	  		$tm = $row['totalmarks'];
 	  		$rollno = $row['roll_no'];
 	  		$marksAlloc = $row['marks_alloc'];
 	  	}

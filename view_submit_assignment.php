@@ -41,21 +41,9 @@
 						
 						
                         <!-- block -->
-
-                        
                         <div id="block_bg" class="block">
                             <div class="navbar navbar-inner block-header">
-                            	  <div id="" class="muted pull-right">
-                <?php 
-								$my_student = mysqli_query($conn,"SELECT * FROM teacher_class_student
-														LEFT JOIN student ON student.student_id = teacher_class_student.student_id 
-														INNER JOIN class ON class.class_id = student.class_id where teacher_class_id = '$get_id' order by lastname ")or die(mysqli_error());
-                $count_my_student = mysqli_num_rows($my_student);
-                ?>
-                Number of Students: <span class="badge badge-info"><?php echo $count_my_student; ?></span>
-              </div>
-
-                                <div id="" class="muted pull-left"><a href="assignment.php<?php echo '?id='.$get_id; ?>"><i 	class="icon-arrow-left"></i> Back</a></div>
+                                <div id="" class="muted pull-right"><a href="assignment.php<?php echo '?id='.$get_id; ?>"><i class="icon-arrow-left"></i> Back</a></div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -64,8 +52,7 @@
 										$row1 = mysqli_fetch_array($query1);
 									
 									?>
-									<div class="alert alert-info"> Assignment Name : <?php echo $row1['fname']; ?><br>Uploaded Date : <?php echo $row1['fdatein']; ?></br>DeadLine : <?php echo $row1['deadline_date']; ?>   <?php echo $row1['deadline_time']; ?></div>
-
+									<div class="alert alert-info">Submit Assignment in : <?php echo $row1['fname']; ?></div>
 									
 									<div id="">
   											
@@ -74,12 +61,11 @@
 						
 										<thead>
 										        <tr>
-										        <th>Roll No.</th>
-										        <th>Name</th>
-										        <th>USN</th>
-										        <th>Status</th>
 												<th>Date Upload</th>
-												<th>Grade</th>
+												<th>File Name</th>
+												<th>Description</th>
+												
+												<th>Submitted by:</th>
 												<th></th>
 												<th></th>
 												</tr>
@@ -95,50 +81,22 @@
 										while($row = mysqli_fetch_array($query)){
 										$id  = $row['student_assignment_id'];
 									?>                              
-										<tr width="100">
-											
-										 <td><?php echo $row['roll_no']; ?></td>
-										 
-										 	 <td><?php echo $row['firstname']." ".$row['lastname']; ?></td>
-										 	 <td><?php echo $row['username'] ?></td>
-										 	 <td><?php if($row['status_assignment'] == 0){
-										 	 		echo "Pending";	
-										 	 }else if($row['status_assignment'] == 1){
-										 	 	echo "Submitted";
-										 	 } ?></td>
+										<tr>
 										 <td><?php echo $row['assignment_fdatein']; ?></td>
-										 <td><?php echo $row['grade'] ?></td>
-                                       <!--  <td><a href="assignment_pdf.php?id=<?php echo $get_id ?>&post_id=<?php echo $post_id ?>&student_id=<?php echo $row['student_id'];?>&student_assignment_id=<?php echo $row['student_assignment_id']; ?>"><?php  echo $row['fname']; ?></a></td> -->
-                                       <!--  <td><?php  echo $row['fname']; ?></td>
-                                         <td><?php echo $row['fdesc']; ?></td> -->
+                                         <td><a href="assignment_pdf.php?id=<?php echo $get_id ?>&post_id=<?php echo $post_id ?>&student_id=<?php echo $row['student_id'];?>&student_assignment_id=<?php echo $row['student_assignment_id']; ?>"><?php  echo $row['fname']; ?></a></td>
+                                         <td><?php echo $row['fdesc']; ?></td>
 										                                                                                                                 
-                                         <!--<td><?php echo $row['firstname']." ".$row['lastname']; ?></td>                                                        -->                
-                                                                                                                 
-                                         
-										 
+                                         <td><?php echo $row['firstname']." ".$row['lastname']; ?></td>                                                                        
+                                         <td><a href="<?php echo $row['floc']; ?>"><i class="icon-download icon-large"></i></a></td>                                                                        
+                                         <td width="140">
+										 <form method="post" action="save_grade.php">
 										 <input type="hidden" class="span4" name="id" value="<?php echo $id; ?>">
 										 <input type="hidden" class="span4" name="post_id" value="<?php echo $post_id; ?>">
 										 <input type="hidden" class="span4" name="get_id" value="<?php echo $get_id; ?>">
-										 
-										 	<?php if($row['status_assignment'] == 1){?>
-										 	 		<td><a href="<?php echo $row['floc']; ?>"><i class="icon-download icon-large"></i></a></td>	
-										 	 <?php }else if($row['status_assignment'] == 0){?>
-										 	 	<td></td>
-										 	 	
-										 	 <?php } ?>
-										 <?php if($row['status_assignment'] == 1){?>
-										 	 		<td><a class="btn btn-success" style='margin-right:0px;'  href="assignment_pdf.php?id=<?php echo $get_id ?>&post_id=<?php echo $post_id ?>&student_id=<?php echo $row['student_id'];?>&student_assignment_id=<?php echo $row['student_assignment_id']; ?>"><i class="icon-upload icon-large"></i>View Submitted Assignment</a></td>	
-										 	 <?php }else if($row['status_assignment'] == 0){?>
-										 	 	<td></td>
-										 	 	
-										 	 <?php
-										 	 	
-										 	 } ?>
-										 	
-										 
-										 
-										 
-										                                                                        
+										 <input type="text" class="span4" name="grade" value="<?php echo $row['grade']; ?>">
+										 <button name="save" class="btn btn-success" id="btn_s"><i class="icon-save"></i> Save</button>
+										 </form>
+										 </td>                                                                        
                                 </tr>
                          
 						 <?php } ?>
