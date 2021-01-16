@@ -38,7 +38,7 @@
 				$qualificationName = $_POST['qualificationName'];
 				$inputProficiency = $_POST['inputProficiency'];
 				$teachingExperiece = $_POST['teachingExperiece'];
-				$projectsHandled = $_POST['projectsHandled'];
+				$project = $_POST['project'];
 				$publication = $_POST['publication'];
 				$filename = $_FILES["image"]["name"]; 
 				$tempname = $_FILES["image"]["tmp_name"];
@@ -54,7 +54,7 @@
 			    if(move_uploaded_file($tempname, $folder)) {
 
 			    }
-		        $result1 = mysqli_query($conn,"INSERT INTO `edit_profile`(`name`, `designation`, `proficiency`, `teaching_exp`, `project`, `qualification`, `publication`, `image`, `teacher_id`) VALUES ('$inputName','$designation','$inputProficiency','$teachingExperiece','$projectsHandled','$qualificationName','$publication','$folder',$teacherId)")or die(mysqli_error()); 
+		        $result1 = mysqli_query($conn,"INSERT INTO `edit_profile`(`name`, `designation`, `proficiency`, `teaching_exp`, `project`, `qualification`, `publication`, `image`, `teacher_id`) VALUES ('$inputName','$designation','$inputProficiency','$teachingExperiece','$project','$qualificationName','$publication','$folder',$teacherId)")or die(mysqli_error()); 
 		  		echo($result1);
 			         
 			          
