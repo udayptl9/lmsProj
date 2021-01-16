@@ -1,6 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
     <body>
+    	<?php $department_id = $_SESSION['department']; ?>
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -24,6 +25,19 @@
 											</div>
 										</div>
 										<div class="control-group">
+											<label class="control-label" for="inputEmail">Class</label>
+											<div class="controls">
+											<select name='classCode'> 
+												<?php 
+												$result = mysqli_query($conn, "SELECT * FROM class WHERE did=$department_id");
+												while($row=mysqli_fetch_array($result)) {
+													echo '<option value="'.$row['class_id'].'">'.$row['class_name'].'</option>';
+												}
+												 ?>
+											</select>
+											</div>
+										</div>
+										<div class="control-group">
 											<label class="control-label" for="inputPassword">Subject Title</label>
 											<div class="controls">
 											<input type="text" class="span8" name="title" id="inputPassword" placeholder="Subject Title" required>
@@ -35,6 +49,7 @@
 											<input type="text" class="span1" name="unit" id="inputPassword" required>
 											</div>
 										</div>
+
 											<div class="control-group">
 											<label class="control-label" for="inputPassword">Semester</label>
 											<div class="controls">
@@ -76,9 +91,9 @@
 										$unit = $_POST['unit'];
 										$description = $_POST['description'];
 										$semester = $_POST['semester'];
+										$class_id = $_POST['classCode'];
 										
-										
-										$query = mysqli_query($conn,"select * from subject where subject_code = '$subject_code' ")or die(mysqli_error());
+										$query = mysqli_query($conn,"select * from subject where subject_code = '$subject_code' AND cid=$class_id")or die(mysqli_error());
 										$count = mysqli_num_rows($query);
 
 										if ($count > 0){ ?>
@@ -87,7 +102,8 @@
 										</script>
 										<?php
 										}else{
-										mysqli_query($conn,"insert into subject (subject_code,subject_title,description,unit,semester) values('$subject_code','$title','$description','$unit','$semester')")or die(mysqli_error());
+
+										mysqli_query($conn,"insert into subject (subject_code,subject_title,description,unit,semester, cid) values('$subject_code','$title','$description','$unit','$semester', $class_id)")or die(mysqli_error());
 										
 										
 										mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$user_username','Add Subject $subject_code')")or die(mysqli_error());
