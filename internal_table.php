@@ -1,5 +1,8 @@
 	<?php include('dbcon.php'); ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 	<script>
 		let pastInternals = [];
 	</script>
@@ -56,7 +59,79 @@
 			transform: scale(0);
 			transition: 0.2s;
 		}
+
+		.internalGraph {
+			font-size: 16px;
+			cursor: pointer;
+			color: green;
+			opacity: 0.6;
+		}
+		.graphDisplay {
+			position: fixed;
+			width: 95vw;
+			height: 95vh;
+			background: white;
+			border-radius: 20px;
+			box-shadow: 1px 1px 3px 1px grey;
+			top: 0;
+			left: 0;
+			left: 0;
+			right: 0;
+			margin: auto auto;
+			z-index: 5;
+			transform: scale(0);
+		}
+		.graphShow {
+			transform: scale(1);
+			transition: 0.2s;
+		}
+		.graphHide {
+			transform: scale(0);
+			transition: 0.2s;
+		}
+		.closeButton {
+			position: absolute;
+			top: 50px;
+			right: 20px;
+			padding: 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			background: red;
+			color: white;
+			font-weight: bold;
+		}
+		.graphContainer {
+			position:absolute;
+			top: 60px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 70%;
+			height: 50vh;
+		}
+		.internalDetails {
+			background: grey;
+			position: absolute;
+			right: 0;
+			top: 60px;
+			width: 30%;
+			height: 50%;
+		}
+		.popUpMain {
+			display: grid;
+			grid-template-columns: 70% 30%;
+		}
 	</style>
+	<div class="graphDisplay">
+		<div class="closeButton">X</div>
+		<div class='popUpMain' style='position: relative;'>
+			<div class="graphContainer">
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class='internalDetails'>
+			</div>
+		</div>
+	</div>
 	<div class="addinternalpopup">
 		<button class="btn btn-danger closeinternalpopup">X</button>
 		<div class="form-group modules">
@@ -85,20 +160,21 @@
 						class="icon-list"></i> Report</a>
 			</div>
 			<script>
-				function create_UUID(){
+				function create_UUID() {
 					var dt = new Date().getTime();
-					var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-							var r = (dt + Math.random()*16)%16 | 0;
-							dt = Math.floor(dt/16);
-							return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+					var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+						var r = (dt + Math.random() * 16) % 16 | 0;
+						dt = Math.floor(dt / 16);
+						return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 					});
 					return uuid;
-			}
+				}
 				let totalIAs = 0;
 				document.querySelector('.addinternalsubmit').addEventListener('click', function (event) {
 					event.preventDefault();
 					let th = document.createElement('th');
 					th.classList.add('IaNameTh');
+					th.classList.add('iaNameToEdit');
 					th.innerHTML =
 						`${document.querySelector('.internalName').value} (${document.querySelector('.internalName1').value})`;
 					document.querySelector('.headings').appendChild(th);
@@ -156,7 +232,7 @@
 						const IAs = totalStudentsDiv[i].querySelectorAll('.newMark');
 						for (let j = 0; j < IAs.length; j++) {
 							let studentIA = {};
-							studentIA['IAName'] = document.querySelectorAll('.IaNameTh')[j].innerHTML;
+							studentIA['IAName'] = document.querySelectorAll('.iaNameToEdit')[j].innerHTML;
 							studentIA['IAMark'] = IAs[j].querySelector('.marksEdited').value;
 							student['IAs'].push(studentIA);
 						}
@@ -276,6 +352,7 @@ if (isset($_POST['submit'])){
 	</form>
 	<script>
 		let check = 1;
+		let headingNumber = 0;
 		pastInternals.forEach(internal => {
 			const data = internal['students'];
 			for (let i = 0; i < data.length; i++) {
@@ -284,10 +361,12 @@ if (isset($_POST['submit'])){
 						data[i]['IAs'].forEach(ia => {
 							if (check) {
 								let th = document.createElement('th');
-								th.innerHTML = `${ia['IAName']}`;
+								th.innerHTML =
+									`<span class='iaNameToEdit'>${ia['IAName']}</span>   <span class='internalGraph' onclick='showGraph(${JSON.stringify(data)}, ${headingNumber}, "${ia['IAName']}")'><i class="fa fa-bar-chart" aria-hidden="true"></i></span>`;
 								th.classList.add('thEditable');
 								th.classList.add('IaNameTh');
 								document.querySelector('.headings').appendChild(th);
+								headingNumber++;
 							}
 							let td = document.createElement('td');
 							td.classList.add('newMark');
@@ -335,13 +414,93 @@ if (isset($_POST['submit'])){
 			document.querySelectorAll('.thEditable').forEach(editable => {
 				editable.addEventListener('dblclick', function (event) {
 					event.preventDefault();
-					editable.innerHTML = `<input type='text' class='thedit' value='${editable.innerHTML}'>`;
+					editable.querySelector('.iaNameToEdit').innerHTML =
+						`<input type='text' class='thedit' value='${editable.querySelector('.iaNameToEdit').innerHTML}'>`;
 					document.querySelector('.thedit').focus();
 					document.querySelector('.thedit').addEventListener('focusout', function (event) {
 						event.preventDefault();
-						event.target.parentElement.innerHTML = `${event.target.value}`;
+						editable.querySelector('.iaNameToEdit').innerHTML = `${event.target.value}`;
 					})
 				})
 			})
+		})
+
+		function showGraph(data, headingNumber, internalName) {
+			let labels = [];
+			let dataToDisplay = [];
+			let backgrounds = [];
+			data.forEach(student=>{
+				// for randomColors
+				// var o = Math.round, r = Math.random, s = 255;
+				 // backgrounds.push('rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')');
+				var color = '#';
+				for (var i = 0; i < 6; i++) {
+						color += Math.floor(Math.random() * 10);
+				}
+				backgrounds.push(color);
+				labels.push(student['USN'])
+				dataToDisplay.push(Number(student['IAs'][headingNumber]['IAMark']));
+			})
+			let myChart = document.getElementById('myChart').getContext('2d');
+			// Global Options
+			Chart.defaults.global.defaultFontFamily = 'Lato';
+			Chart.defaults.global.defaultFontSize = 18;
+			Chart.defaults.global.defaultFontColor = '#777';
+
+			let massPopChart = new Chart(myChart, {
+				type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+				data:{
+					labels: labels,
+					datasets:[{
+						label:'Marks',
+						data: dataToDisplay,
+						backgroundColor:backgrounds,
+						borderWidth:1,
+						borderColor:'#777',
+						hoverBorderWidth:3,
+						hoverBorderColor:'#000'
+					}]
+				},
+				options:{
+					title:{
+						display:true,
+						text:`${internalName}`,
+						fontSize:25
+					},
+					legend:{
+						display:true,
+						position:'right',
+						labels:{
+							fontColor:'#000'
+						}
+					},
+					layout:{
+						padding:{
+							left:50,
+							right:0,
+							bottom:0,
+							top:0
+						}
+					},
+					tooltips:{
+						enabled:true
+					},
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero: true
+									}
+							}]
+					}
+				}
+			});
+			document.querySelector('.graphDisplay').classList.add('graphShow');
+			document.querySelector('.graphDisplay').classList.remove('graphHide');
+			console.log(data, headingNumber);
+		}
+		document.querySelector('.closeButton').addEventListener('click', event=>{
+			event.preventDefault();
+			document.querySelector('.graphDisplay').classList.remove('graphShow');
+			document.querySelector('.graphDisplay').classList.add('graphHide');
 		})
 	</script>
