@@ -23,7 +23,7 @@
 					<th>Name</th>
 					<th>ID Number</th>
 					<th>DoB</th>
-			
+					
 					<th>Course Yr & Section</th>
 					<th></th>
 		</tr>
@@ -31,11 +31,12 @@
 		<tbody>
 			
 		<?php
-		$department_id = number_format($_SESSION['department']);
+		$department_id = $_SESSION['department'];
 	$query = mysqli_query($conn,"select * from student LEFT JOIN class ON student.class_id = class.class_id WHERE student.did=$department_id ORDER BY student.student_id DESC") or die(mysqli_error($conn));
 	while ($row = mysqli_fetch_array($query)) {
 		$id = $row['student_id'];
 		?>
+		
 		
 		<tr>
 		<td width="30">
@@ -44,7 +45,7 @@
 	
 		<td><?php echo $row['firstname'] . " " . $row['lastname']; ?></td> 
 		<td><?php echo $row['username']; ?></td>
-		<td><?php echo $row['dob']; ?></td> 
+		<td><?php echo $row['dob']; ?></td>
 	
 		<td width="100"><?php echo $row['class_name']; ?></td> 
 	

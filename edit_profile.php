@@ -6,7 +6,7 @@
 		$teachingExperiece = $_POST['teachingExperiece'];
 		$projectsHandled = $_POST['projectsHandled'];
 		$publication = $_POST['publications'];
-	
+
 		include('dbcon.php');
 		
 

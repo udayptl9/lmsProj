@@ -41,7 +41,7 @@
                         <div class="control-group">
                             <div class="controls">
 
-                                <button name="Upload" type="submit" value="Upload" class="btn btn-success" /><i class="icon-upload-alt"></i>&nbsp;Upload</button>
+                                <button name="Upload" type="submit" value="Upload" class="btn btn-success" <i class="icon-upload-alt"></i>&nbsp;Upload</button>
                             </div>
                         </div>
                     </form>

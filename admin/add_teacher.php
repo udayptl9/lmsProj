@@ -16,22 +16,6 @@
                                         </div>
 									-->	
 										
-										  <div class="control-group">
-											<label>Department:</label>
-                                          <div class="controls">
-                                            <select name="department"  class="" required>
-                                             	<option></option>
-											<?php
-											$query = mysqli_query($conn,"select * from department order by department_name");
-											while($row = mysqli_fetch_array($query)){
-											
-											?>
-											<option value="<?php echo $row['department_id']; ?>"><?php echo $row['department_name']; ?></option>
-											<?php } ?>
-                                            </select>
-                                          </div>
-                                        </div>
-										
 										<div class="control-group">
                                           <div class="controls">
                                             <input class="input focused" name="firstname" id="focusedInput" type="text" placeholder = "Firstname">
@@ -65,7 +49,7 @@
                            
                                 $firstname = $_POST['firstname'];
                                 $lastname = $_POST['lastname'];
-                                $department_id = $_POST['department'];
+                                $department_id = $_SESSION['department'];
 								
 								
 								$query = mysqli_query($conn,"select * from teacher where firstname = '$firstname' and lastname = '$lastname' ")or die(mysqli_error());

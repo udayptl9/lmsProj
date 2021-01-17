@@ -1,4 +1,6 @@
    <div class="row-fluid">
+   	<?php $department_id = $_SESSION['department']; ?>
+   	<?php echo '<script>console.log('.$department_id.')</script>'; ?>
 	   <style>
 		   .infoContent {
 			   position: absolute;
@@ -60,7 +62,7 @@
 												<select  name="class_id" class="" required>
 													<option></option>
 												<?php
-												$cys_query = mysqli_query($conn,"select * from class order by class_name");
+												$cys_query = mysqli_query($conn,"select * from class WHERE did=$department_id");
 												while($cys_row = mysqli_fetch_array($cys_query)){
 												
 												?>
@@ -87,6 +89,12 @@
 												<input  name="ln" class="input focused" id="focusedInput" type="text" placeholder = "Lastname" required>
 											</div>
 											</div>
+
+											<div class="control-group">
+											<div class="controls">
+												<input  name="dob" class="input focused" id="focusedInput" type="number" placeholder = "Date of Birth(ddmmyyyy)" required>
+											</div>
+											</div>
 									
 											
 												<div class="control-group">
@@ -108,10 +116,10 @@
 											<select name="class_id_sheet" class="class_id_sheet" required>
 												<option></option>
 												<?php
-																										$cys_query = mysqli_query($conn,"select * from class order by class_name");
-																										while($cys_row = mysqli_fetch_array($cys_query)){
-																										
-																										?>
+													$cys_query = mysqli_query($conn,"SELECT * FROM `class` WHERE did=$department_id");
+													while($cys_row = mysqli_fetch_array($cys_query)){
+													
+													?>
 												<option value="<?php echo $cys_row['class_id']; ?>">
 													<?php echo $cys_row['class_name']; ?>
 												</option>
@@ -251,7 +259,7 @@
 						student['fname'] = fname;
 						student['lname'] = lname;
 						student['usn'] = usn;
-						student['did'] = <?php echo $_SESSION['department']; ?>,
+						student['did'] = <?php echo $department_id ?>,
 						student['dob'] = Number(dob);
 						student['classId'] = Number(document.querySelector('.class_id_sheet').value);
 						students.push(student);
@@ -296,32 +304,23 @@
 
 				})
 			}
-			jQuery(document).ready(function($){
-				$("#add_student").submit(function(e){
+				document.querySelector("#add_student").addEventListener('submit', function(e){
 					e.preventDefault();
-					var _this = $(e.target);
-					var formData = $(this).serialize();
+					var formData = new FormData(e.target);
+					formData.append('department', <?php echo $department_id; ?>);
 					$.ajax({
-						type: "POST",
-						url: "save_student.php",
+						url: 'save_student.php',
+						type: 'POST',
 						data: formData,
-						success: function(html){
-							$.jGrowl("Student Successfully  Added", { header: 'Student Added' });
-							$('#studentTableDiv').load('student_table.php', function(response){
-								$("#studentTableDiv").html(response);
-								$('#example').dataTable( {
-									"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-									"sPaginationType": "bootstrap",
-									"oLanguage": {
-										"sLengthMenu": "_MENU_ records per page"
-									}
-								} );
-								$(_this).find(":input").val('');
-								$(_this).find('select option').attr('selected',false);
-								$(_this).find('select option:first').attr('selected',true);
-							});
-						}
+						beforeSend: function() {
+							console.log("saving student");
+						},
+						success: function(response) {
+							console.log(response);
+						},
+						processData: false,
+					    contentType: false,
+					    cache: false,
 					});
 				});
-			});
 			</script>		

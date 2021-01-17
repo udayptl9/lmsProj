@@ -11,6 +11,9 @@
                                           <div class="controls">
                                             <input name="class_name" class="input focused" id="focusedInput" type="text" placeholder = "Class Name" required>
                                           </div>
+                                          <div class="controls">
+                                            <input name="class_name" class="input focused" id="focusedInput" type="text" placeholder = "Div" required>
+                                          </div>
                                         </div>
 										
 									

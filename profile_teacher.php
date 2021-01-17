@@ -25,7 +25,7 @@
                         <div id="block_bg" class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div id="" class="muted pull-left">
-                                	<img src="bldeacet_header_logo_caps.png">
+                                	<img src="bldeacet_header_logo_caps.png" style="margin-left: 70px;">
                                 </div>
                             </div>
                             <div class="block-content collapse in">
@@ -42,7 +42,8 @@
 	  									<div><h4>Qualification: <?php echo $row['qualification']; ?></h4></div>
 	  									<div><h4>Proficiency: <?php echo $row['proficiency']; ?></h4></div>
 	  									<div><h4>Teaching Experience: <?php echo $row['teaching_exp']; ?></h4></div>
-	  									<div><h4>Projects: <?php echo $row['project']; ?></h4></div>
+	  									
+	  									<div><h4 id="NAME" class="projectsDisplay">Project Handled: </h4></div>
 	  									<div><h4 class='publicationsDisplay'>Publication: </h4></div>
 	  									<div style='position: absolute; top: 15px; right: 15px;'><img src="<?php echo $row['image']; ?>" style="width: 200px;" alt='profile Image'></div>
 	  									<script type="text/javascript">
@@ -50,11 +51,25 @@
 	  										let index = 1;
 	  										publicationsObject['publications'].forEach(publication=>{
 	  											if(index == publicationsObject['publications'].length) {
-	  												document.querySelector('.publicationsDisplay').innerHTML += `${publication}`;
+	  												document.querySelector('.publicationsDisplay').innerHTML += `• ${publication}<br>`;
 	  											} else {
-	  												document.querySelector('.publicationsDisplay').innerHTML += `${publication}, `;
+	  												document.querySelector('.publicationsDisplay').innerHTML += `<br>• ${publication} <br> `;
 	  											}
 	  											index++;
+	  										})
+	  									</script>
+	  									<script>
+	  										const projectsObject = JSON.parse('<?php echo $row["project"]; ?>');
+	  										index = 1;
+	  										projectsObject['projects'].forEach(project=>{
+	  											if(index == projectsObject['projects'].length) {
+	  												document.querySelector('.projectsDisplay').innerHTML
+	  													+= `• ${project} <br>`;
+	  											} else {
+	  												document.querySelector('.projectsDisplay').innerHTML
+	  													+= `<br>• ${project} <br>`;
+	  											}
+	  											index++
 	  										})
 	  									</script>
 										

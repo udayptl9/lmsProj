@@ -81,7 +81,7 @@
 
 				<a class="btn btn-info addinternal"><i class="icon-pencil"></i>Add Internal</a>
 				<a class="btn btn-info submit saveinternal"><i class="icon-save icon-large"></i> Save</a>
-				<a onclick="window.open('print_internal.php<?php echo '?id='.$get_id; ?>')" class="btn btn-success"><i
+				<a onclick="window.open('internal_print.php<?php echo '?id='.$get_id; ?>')" class="btn btn-success"><i
 						class="icon-list"></i> Report</a>
 			</div>
 			<script>

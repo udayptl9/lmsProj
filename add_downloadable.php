@@ -154,6 +154,7 @@
 			
 
                 </div>
+							<?php/*  include('teacher_right_sidebar.php')  */?>
 	
             </div>
 		<?php include('footer.php'); ?>

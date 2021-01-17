@@ -23,6 +23,38 @@
 		      text-align: center;
 		    }
     	</style>
+    		<script>    
+				function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+		 	</script>
 		<?php include('navbar_teacher.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -31,7 +63,7 @@
                      <div class="row-fluid">
 						<div class="pull-right">
 						
-							<button id="print"   class="btn btn-success"><i class="icon-print"></i> Print Student List</button>
+							<button onclick="exportTableToExcel('tblData')"   class="btn btn-success"><i class="icon-print"></i> Print Student List</button>
 						</div>
 						<?php include('my_students_breadcrums.php'); ?>
                         <!-- block -->
@@ -62,7 +94,20 @@
                             <div class="block-content collapse in">
                                 <div class="span12">
 						
-												<table cellpadding="0" cellspacing="0" border="0" class="table" id="">
+												<table id="tblData" cellpadding="0" cellspacing="0" border="0" class="table" >
+													
+										 
+										  
+										 	
+										 	<th style="display:none"> Bldea College Of Engg</th>
+
+										 
+										 
+
+										 
+										 
+										 
+										                
 							
 										<thead>
 										        <tr class='attendenecsHeading'>
@@ -146,16 +191,6 @@
 		<?php include('footer.php'); ?>
         </div>
 		<?php include('script.php'); ?>
-		<script type="text/javascript" src="jquery.min.js"></script>
-		<script type="text/javascript" src="jquery.table2excel.js"></script>
-		<script>    
-				$('$btn').click(function(){
-					$('.table').table2excel({
-						exclude: ".noExl",
-						name: "My attendence",
-						filename: "Data"
-					});
-				});
-		 	</script>
+	
     </body>
 </html>

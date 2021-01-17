@@ -21,29 +21,7 @@
 									$row = mysqli_fetch_array($query);
 									?>
 										
-										  <div class="control-group">
-											<label>Department:</label>
-                                          <div class="controls">
-                                            <select name="department"  class="chzn-select"required>
-											<?php
-											$query_teacher = mysqli_query($conn,"select * from teacher join  department")or die(mysqli_error());
-											$row_teacher = mysqli_fetch_array($query_teacher);
-											
-											?>
-											
-                                             	<option value="<?php echo $row_teacher['department_id']; ?>">
-												<?php echo $row_teacher['department_name']; ?>
-												</option>
-											<?php
-											$department = mysqli_query($conn,"select * from department order by department_name");
-											while($department_row = mysqli_fetch_array($department)){
-											
-											?>
-											<option value="<?php echo $department_row['department_id']; ?>"><?php echo $department_row['department_name']; ?></option>
-											<?php } ?>
-                                            </select>
-                                          </div>
-                                        </div>
+										  
 										
 										<div class="control-group">
                                           <div class="controls">
@@ -78,7 +56,6 @@
                        
                                 $firstname = $_POST['firstname'];
                                 $lastname = $_POST['lastname'];
-                                $department_id = $_POST['department'];
 								
 								
 								$query = mysqli_query($conn,"select * from teacher where firstname = '$firstname' and lastname = '$lastname' ")or die(mysqli_error());
@@ -91,7 +68,7 @@
 								<?php
 								}else{
 								
-								mysqli_query($conn,"update teacher set firstname = '$firstname' , lastname = '$lastname' , department_id = '$department_id' where teacher_id = '$get_id' ")or die(mysqli_error());	
+								mysqli_query($conn,"update teacher set firstname = '$firstname' , lastname = '$lastname' where teacher_id = '$get_id' ")or die(mysqli_error());	
 								
 								?>
 								<script>

@@ -16,7 +16,8 @@
 														<select name="department_id" class="form-control form-control-lg department_id" id="department"  required>
 															<option value="" disabled selected>-Select department-</option>
 															<?php
-															$query = mysqli_query($conn,"select * from department order by department_name");
+															$department_id = $_SESSION['department'];
+															$query = mysqli_query($conn,"select * from department where department_id=$department_id");
 															while($row = mysqli_fetch_array($query)){
 															
 															?>

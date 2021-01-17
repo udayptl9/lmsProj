@@ -13,6 +13,7 @@ $assignment_id  = $_POST['id'];
 $name  = $_POST['name'];
 $roll_no  = $_POST['rollno'];
 
+
 $get_id = $_POST['get_id'];
 //Function to sanitize values received from the form. Prevents SQL injection
 function clean($str) {
@@ -69,7 +70,7 @@ if ((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 
             if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $newname))) {
                 //successful upload
                 // echo "It's done! The file has been saved as: ".$newname;		   
-                $qry2 = ("INSERT INTO student_assignment (fdesc,floc,assignment_fdatein,fname,assignment_id,student_id,roll_no) VALUES ('$filedesc','$newname',NOW(),'$name','$assignment_id','$session_id','$roll_no')")or die(mysqli_error());
+                $qry2 = ("INSERT INTO student_assignment (fdesc,floc,assignment_fdatein,fname,assignment_id,student_id,roll_no,status_assignment,teacher_class_id) VALUES ('$filedesc','$newname',NOW(),'$name','$assignment_id','$session_id','$roll_no',1,'$get_id')")or die(mysqli_error());
 				mysqli_query($conn,"insert into teacher_notification (teacher_class_id,notification,date_of_notification,link,student_id,assignment_id) value('$get_id','$name_notification',NOW(),'view_submit_assignment.php','$session_id','$assignment_id')")or die(mysqli_error());
 			   //$result = @mysqli_query($conn,$qry);
                 $result2 = $connector->query($qry2);
