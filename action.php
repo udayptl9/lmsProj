@@ -11,7 +11,8 @@ echo $output;
 
 
 $output="";
-$sql="SELECT * FROM subject where cid='".$_POST['classID']."' ORDER BY subject_code";
+$class_id = $_POST['classID'];
+$sql="SELECT * FROM subject where cid=$class_id ORDER BY subject_code";
 $result=mysqli_query($conn,$sql);
 
 while($row=mysqli_fetch_array($result)){

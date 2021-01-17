@@ -42,7 +42,7 @@
 													<label>Subject:</label>
 														<select name="subject_id" class="form-control form-control-lg subject_id" id="subject_code" required>
 															<option value="" disabled selected>-Select subject-</option>
-
+															
 																													
 														</select>
 													</div>
