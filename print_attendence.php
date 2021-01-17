@@ -99,27 +99,16 @@
 										 
 										  
 										 	
-										 	<th style="display:none"> Bldea College Of Engg</th>
-
-										 
-										 
-
-										 
-										 
-										 
-										                
-							
+										 	<th style="display:none" class='excelLogo'> Bldea College Of Engg</th>
 										<thead>
 										        <tr class='attendenecsHeading'>
 										        <th>Roll No.</th>	
-												<th>Firstname</th>
-												<th>Id Number</th>
+                            <th>First Name</th>
+                            <th>Id Number</th>
 
 												</tr>
-												
 										</thead>
 										<tbody class="attendenceBody">
-											
 												<?php
 														$my_student = mysqli_query($conn,"SELECT * FROM teacher_class_student
 														LEFT JOIN student ON student.student_id = teacher_class_student.student_id 
@@ -134,21 +123,13 @@
 									
 										 <td><?php  echo $row['rollno']; ?></td>
 										 <td><?php echo $row['firstname']; echo $row['lastname']; ?></td>
-                                         <td><?php  echo $row['username']; ?></td>
-                                         
-
-                             
-                             
-
-                               
+                                         <td><?php  echo $row['username']; ?></td>         
                                 </tr>
-                         
 						 <?php } ?>
 						   
                               
 										</tbody>
 									</table>
-										
                                 </div>
                             </div>
                         </div>
@@ -183,6 +164,7 @@
 	                      second++;
 	                    })
 	                   })
+                     document.querySelector('.excelLogo').colSpan = `${document.querySelector('.attendenecsHeading').querySelectorAll('th').length}`;
                   </script>
               </div>
             </div>
