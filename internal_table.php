@@ -60,6 +60,9 @@
 			transition: 0.2s;
 		}
 
+		.graphContainer {
+			grid-area: graph;
+		}
 		.internalGraph {
 			font-size: 16px;
 			cursor: pointer;
@@ -78,7 +81,7 @@
 			left: 0;
 			right: 0;
 			margin: auto auto;
-			z-index: 5;
+			z-index: 100000;
 			transform: scale(0);
 		}
 		.graphShow {
@@ -99,6 +102,7 @@
 			background: red;
 			color: white;
 			font-weight: bold;
+			z-index: 10;
 		}
 		.graphContainer {
 			position:absolute;
@@ -106,20 +110,22 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			width: 70%;
 			height: 50vh;
 		}
 		.internalDetails {
-			background: grey;
-			position: absolute;
-			right: 0;
 			top: 60px;
-			width: 30%;
-			height: 50%;
+			margin-top: 60px;
+			grid-area: details;
+			max-height: 80vh;
+			overflow-y: auto;
+		}
+		.internalDetails p {
+			font-size: 20px;
 		}
 		.popUpMain {
 			display: grid;
 			grid-template-columns: 70% 30%;
+			grid-template-areas: "graph details";
 		}
 	</style>
 	<div class="graphDisplay">
@@ -128,8 +134,7 @@
 			<div class="graphContainer">
 				<canvas id="myChart"></canvas>
 			</div>
-			<div class='internalDetails'>
-			</div>
+			<div class='internalDetails'></div>
 		</div>
 	</div>
 	<div class="addinternalpopup">
@@ -429,18 +434,28 @@ if (isset($_POST['submit'])){
 			let labels = [];
 			let dataToDisplay = [];
 			let backgrounds = [];
+			let names = [];
 			data.forEach(student=>{
-				// for randomColors
-				// var o = Math.round, r = Math.random, s = 255;
-				 // backgrounds.push('rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')');
+			// for randomColors
+			// var o = Math.round, r = Math.random, s = 255;
+				// backgrounds.push('rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')');
+			//  dark colors
 				var color = '#';
 				for (var i = 0; i < 6; i++) {
 						color += Math.floor(Math.random() * 10);
 				}
 				backgrounds.push(color);
-				labels.push(student['USN'])
+				labels.push(student['USN']);
+				names.push(student['Name']);
 				dataToDisplay.push(Number(student['IAs'][headingNumber]['IAMark']));
 			})
+			document.querySelector('.internalDetails').innerHTML = '';
+			for(let i =0; i<backgrounds.length; i++) {
+				document.querySelector('.internalDetails').innerHTML += `
+					<div style='display: inline-block; width: 50px; height: 25px; background: ${backgrounds[i]}; position: relative;'></div>
+					<p style='display:inline;'>${names[i]}</p><br>
+				`;
+			}
 			let myChart = document.getElementById('myChart').getContext('2d');
 			// Global Options
 			Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -468,7 +483,7 @@ if (isset($_POST['submit'])){
 						fontSize:25
 					},
 					legend:{
-						display:true,
+						display:false,
 						position:'right',
 						labels:{
 							fontColor:'#000'
@@ -496,7 +511,6 @@ if (isset($_POST['submit'])){
 			});
 			document.querySelector('.graphDisplay').classList.add('graphShow');
 			document.querySelector('.graphDisplay').classList.remove('graphHide');
-			console.log(data, headingNumber);
 		}
 		document.querySelector('.closeButton').addEventListener('click', event=>{
 			event.preventDefault();
