@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2021 at 02:14 AM
+-- Generation Time: Jan 18, 2021 at 01:05 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -168,7 +168,7 @@ INSERT INTO `assignment` (`assignment_id`, `floc`, `fdatein`, `fdesc`, `teacher_
 (57, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:00', 'jhj', 9, 196, 'jhg', '', '', 0, '', '', 0),
 (58, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:01', 'jhj', 9, 198, 'jhg', '', '', 0, '', '', 0),
 (59, 'admin/uploads/1316_File_add_class.php', '2021-01-07 16:31:01', 'jhj', 9, 207, 'jhg', '', '', 0, '', '', 0),
-(60, 'admin/uploads/9961_File_pdkeaAO_NC071_2021_01_12_13_21_08.pdf', '2021-01-12 19:56:47', 'wwwwww', 9, 196, 'qqqqqq', '100', '{\"questions\":[{\"questionNo\":\"1\",\"queMaxMarks\":\"50\"},{\"questionNo\":\"2\",\"queMaxMarks\":\"50\"}]}', 0, '16/01/2021', '14:30', 1),
+(60, 'admin/uploads/9961_File_pdkeaAO_NC071_2021_01_12_13_21_08.pdf', '2021-01-12 19:56:47', 'wwwwww', 9, 196, 'qqqqqq', '100', '{\"questions\":[{\"questionNo\":\"1\",\"queMaxMarks\":\"50\"},{\"questionNo\":\"2\",\"queMaxMarks\":\"50\"}]}', 1, '16/01/2021', '14:30', 1),
 (61, 'admin/uploads/3527_File_unnamed.jpg', '2021-01-14 12:31:00', 'seses', 9, 196, 'deadline_date', '30', '{\"questions\":[{\"questionNo\":\"1\",\"queMaxMarks\":\"10\"}]}', 1, '15/01/2021', '14:30', 1),
 (62, 'admin/uploads/3527_File_unnamed.jpg', '2021-01-14 12:31:00', 'seses', 9, 198, 'deadline_date', '30', '{\"questions\":[{\"questionNo\":\"1\",\"queMaxMarks\":\"10\"}]}', 1, '14/01/2021', '14:30', 1);
 
@@ -681,6 +681,25 @@ INSERT INTO `notification_read_teacher` (`notification_read_teacher_id`, `teache
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `offlineassignment`
+--
+
+CREATE TABLE `offlineassignment` (
+  `off_id` int(11) NOT NULL,
+  `offline_class_id` int(11) NOT NULL,
+  `offline_marks` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `offlineassignment`
+--
+
+INSERT INTO `offlineassignment` (`off_id`, `offline_class_id`, `offline_marks`) VALUES
+(0, 198, '{\"students\":[{\"Name\":\"Karyl June Bacobo\",\"USN\":\"21100895\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"10\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"5\"}]},{\"Name\":\"Johnedel Bauno\",\"USN\":\"21100411\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"10\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"2\"}]},{\"Name\":\"Ace John Casuyon\",\"USN\":\"21100393\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"15\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"14\"}]},{\"Name\":\"Jerwin Delos Reyes\",\"USN\":\"21100369\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"10\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"15\"}]},{\"Name\":\"Neovi Devierte\",\"USN\":\"21100557\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"15\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"14\"}]},{\"Name\":\"Ma. Roxette Infante\",\"USN\":\"21100421\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"10\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"8\"}]},{\"Name\":\"Victor Anthony Jacobo\",\"USN\":\"21101050\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"18\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"5\"}]},{\"Name\":\"Danica Lamis\",\"USN\":\"21100396\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"14\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"9\"}]},{\"Name\":\"Eril Pio Mercado\",\"USN\":\"21100291\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"13\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"14\"}]},{\"Name\":\"Mary Ann Panaguiton\",\"USN\":\"21100701\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"11\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"12\"}]},{\"Name\":\"Jethro Pansales\",\"USN\":\"21101273\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"15\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"13\"}]},{\"Name\":\"Mae Ann Panugaling\",\"USN\":\"21100904\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"16\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"14\"}]},{\"Name\":\"Rose Mae Pido\",\"USN\":\"21101195\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"14\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"15\"}]},{\"Name\":\"Savrena Joy Rael\",\"USN\":\"2100287\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"3\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"13\"}]},{\"Name\":\"Kristelle Shaine Rubi\",\"USN\":\"21101063\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"5\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"16\"}]},{\"Name\":\"Jebson Tordillos\",\"USN\":\"21100406\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"6\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"17\"}]},{\"Name\":\"Lee Ann Vertucio\",\"USN\":\"21100351\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"8\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"18\"}]},{\"Name\":\"Jendrix Victosa\",\"USN\":\"21100431\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"11\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"19\"}]},{\"Name\":\"Richelle Villarmia\",\"USN\":\"20101392\",\"class\":\"198\",\"IAs\":[{\"IAName\":\"ASGN-1 (20)\",\"IAMark\":\"14\"},{\"IAName\":\"asgn-2 (20)\",\"IAMark\":\"20\"}]}]}');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `question_type`
 --
 
@@ -970,7 +989,7 @@ INSERT INTO `student_assignment` (`student_assignment_id`, `assignment_id`, `flo
 (12, 55, 'admin/uploads/4568_File_Jan-2019.pdf', '2021-01-01 17:14:59', 'DSSAsd', 'asda', 111, '', 'asdaWQ', '', '', 0, ''),
 (13, 55, 'admin/uploads/1937_File_11414017524-NOV-20365767.PDF', '2021-01-02 11:42:45', 'assignment-0011', 'assignment', 111, '', '50', '', '', 0, ''),
 (14, 55, 'admin/uploads/5304_File_terms-and-condition.pdf', '2021-01-02 11:56:43', 'assignment-00120', 'assignment', 111, '', '55', '', '', 0, ''),
-(16, 60, 'admin/uploads/1331_File_Jan-2019.pdf', '2021-01-15 13:17:34', 'sadasd', 'hii', 137, '20', '20', '', '', 0, '196'),
+(16, 61, 'admin/uploads/1331_File_Jan-2019.pdf', '2021-01-15 13:17:34', 'sadasd', 'hii', 137, '20', '20', '', '', 0, '196'),
 (17, 60, 'admin/uploads/9444_File_Courses_Pharmacy.pdf', '2021-01-15 15:20:53', 'sad', 'saas', 111, '45', '58', '{\"questions\":[{\"questionNo\":\"1\",\"marksObtained\":\"20\"},{\"questionNo\":\"2\",\"marksObtained\":\"25\"}]}', '', 1, '196'),
 (18, 57, 'admin/uploads/5324_File_Jan-2019.pdf', '2021-01-16 11:24:09', 'sad', 'sd', 111, '', '22', '', '', 1, '196');
 
