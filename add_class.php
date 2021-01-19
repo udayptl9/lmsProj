@@ -17,7 +17,7 @@
 															<option value="" disabled selected>-Select department-</option>
 															<?php
 															$department_id = $_SESSION['department'];
-															$query = mysqli_query($conn,"select * from department where department_id=$department_id");
+															$query = mysqli_query($conn,"select * from department order by department_name ");
 															while($row = mysqli_fetch_array($query)){
 															
 															?>

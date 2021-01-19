@@ -76,6 +76,11 @@
 											<div class="controls">
 												<input name="un" class="input focused" id="focusedInput" type="text" placeholder = "ID Number" required>
 											</div>
+											<div class="control-group">
+											<div class="controls">
+												<input name="roll" class="input focused" id="focusedInput" type="number" placeholder = "Roll Number" required>
+											</div>
+										</div>
 											</div>
 											
 											<div class="control-group">
@@ -187,7 +192,7 @@
 			function output(json) {
 				if (showAdd) {
 					let objectKeys = Object.keys(json['Sheet1'][0]);
-					if (objectKeys[0] != 'FirstName' || objectKeys[1] != 'LastName' || objectKeys[2] != 'USN' || objectKeys[3] != 'DOB') {
+					if (objectKeys[0] != 'FirstName' || objectKeys[1] != 'LastName' || objectKeys[2] != 'USN' ||objectKeys[3] != 'Rollno'|| objectKeys[4] != 'DOB') {
 						showAdd = false;
 					} else {
 						document.querySelector('.result').innerHTML = `
@@ -197,7 +202,8 @@
 										<th><input onchange="checkAll()" class='checkAll' type="checkbox" checked></th>
 										<th>First Name</th>	
 										<th>Last Name</th>	
-										<th>USN</th>	
+										<th>USN</th>
+										<th>Roll no</th>	
 										<th>DOB</th>	
 									</tr>
 								</thead>
@@ -224,6 +230,9 @@
 							</td>
 							<td class='usn'>
 								${student.USN}
+							</td>
+							<td class='roll'>
+								${student.rollno}
 							</td>
 							<td class='dob' ${(student.DOB.toString().length < 7) ? ("style='border: 8px solid red;'") : ('')} ${(student.DOB.toString().length == 7) ? ("style='border: 8px solid orange;'") : ('')}>
 								${(student.DOB.toString().length == 7) ? ('0' + student.DOB) : (student.DOB)}
@@ -255,10 +264,12 @@
 						const fname = check.parentElement.parentElement.querySelector('.fname').innerHTML.trim();
 						const lname = check.parentElement.parentElement.querySelector('.lname').innerHTML.trim();
 						const usn = check.parentElement.parentElement.querySelector('.usn').innerHTML.trim();
+						const roll = check.parentElement.parentElement.querySelector('.roll').innerHTML.trim();
 						const dob = check.parentElement.parentElement.querySelector('.dob').innerHTML.trim();
 						student['fname'] = fname;
 						student['lname'] = lname;
 						student['usn'] = usn;
+						student['roll'] = roll;
 						student['did'] = <?php echo $department_id ?>,
 						student['dob'] = Number(dob);
 						student['classId'] = Number(document.querySelector('.class_id_sheet').value);
@@ -322,5 +333,6 @@
 					    contentType: false,
 					    cache: false,
 					});
+					window.location.reload();
 				});
 			</script>		

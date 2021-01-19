@@ -22,6 +22,7 @@
 				
 					<th>Name</th>
 					<th>ID Number</th>
+					<th>Roll No</th>
 					<th>DoB</th>
 					
 					<th>Course Yr & Section</th>
@@ -43,8 +44,10 @@
 		<input id="optionsCheckbox" class="uniform_on" name="selector[]" type="checkbox" value="<?php echo $id; ?>">
 		</td>
 	
-		<td><?php echo $row['firstname'] . " " . $row['lastname']; ?></td> 
+		<td><?php echo $row['firstname'] . " " . $row['lastname']; ?></td>
+
 		<td><?php echo $row['username']; ?></td>
+		<td><?php echo $row['rollno']; ?></td>
 		<td><?php echo $row['dob']; ?></td>
 	
 		<td width="100"><?php echo $row['class_name']; ?></td> 

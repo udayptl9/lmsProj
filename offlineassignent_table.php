@@ -16,6 +16,7 @@
 			</script>';
 		}
 	?>
+	<script>let totalIAs11 = pastInternals[0]['students'].length;</script>
 	<style>
 		.addinternalpopup {
 			position: fixed;
@@ -171,6 +172,7 @@
 				}
 				let totalIAs = 0;
 				document.querySelector('.addinternalsubmit').addEventListener('click', function (event) {
+					
 					event.preventDefault();
 					let th = document.createElement('th');
 					th.classList.add('IaNameTh');
@@ -377,8 +379,8 @@ if (isset($_POST['submit'])){
 								</div>​
 								`;
 							row.parentElement.appendChild(td);
-							row.parentElement.querySelector('.totalMarksTd').innerHTML = Number(row.parentElement
-								.querySelector('.totalMarksTd').innerHTML) + Number(ia['IAMark']);
+							row.parentElement.querySelector('.totalMarksTd').innerHTML = (Number(row.parentElement
+								.querySelector('.totalMarksTd').innerHTML) + Number(ia['IAMark']));
 						})
 						check = 0;
 					}
@@ -408,7 +410,8 @@ if (isset($_POST['submit'])){
 					studentrows[i].querySelectorAll('.marksEdited').forEach(row1 => {
 						totalMarks += Number(row1.value);
 					})
-					document.querySelectorAll('.totalMarksTd')[i].innerHTML = totalMarks;
+					document.querySelectorAll('.totalMarksTd')[i].innerHTML = totalMarks ;
+
 				})
 			}
 			document.querySelectorAll('.thEditable').forEach(editable => {

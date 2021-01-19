@@ -1,0 +1,58 @@
+<table id="tblData" cellpadding="0" cellspacing="0" border="0" class="table">
+													
+										 
+										  <thead>
+										 	<tr>
+										 	<th style=" margin:0px;padding:0px;" class="excelLogo" colspan="5"><h2> B.L.D.E.A's V.P. Dr.P.G.Halakatti College of Engineering and Technology</h2></th></tr>
+										 	<tr><th class="excelLogo1" colspan="6"><h4>Department:computer science engineering</h4></th></tr>
+										 	<tr><td class="excelLogo2"><h5>subject:17MAT31-B</h5></td><td class="excelLogo" style="margin-left:35px;"><h5>Class:CS-3B</h5></td></tr>
+										 	<tr>
+										 		</tr>
+										 
+										 
+
+										 
+										 
+										 
+										                
+							
+										
+				<tr class="headings">
+					<th>Name</th>
+					<th>ID Number</th>
+					<th>Class</th>
+					<th>Average</th>
+				<th class="thEditable IaNameTh">assign-1 (87)</th></tr>
+			</thead>
+			<tbody>
+
+				
+
+
+				<tr class="studentrows">
+
+					<td class="studentName">Wina Mae Espenorio</td>
+					<td class="studentUSN">20100447</td>
+
+
+					<td width="100">CS-3B</td>
+					<td width="100" class="totalMarksTd">5</td>
+				<td class="newMark">10</td></tr>
+				
+
+
+				<tr class="studentrows">
+
+					<td class="studentName">Mark Dominic Sayon</td>
+					<td class="studentUSN">21100867</td>
+
+
+					<td width="100">CS-4B</td>
+					<td width="100" class="totalMarksTd">5</td>
+				<td class="newMark">10</td></tr>
+				
+				
+
+
+			</tbody>
+		</table>

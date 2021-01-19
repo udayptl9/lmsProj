@@ -42,6 +42,7 @@ if(isset($_POST['action'])) {
             $did = $value->did;
             $fn = $value->fname;
             $ln = $value->lname;
+            $roll = $value->roll;
             $class_id = $value->classId;
             $dob = $value->dob;
             $checkSql = mysqli_query($conn, "SELECT `username` FROM `student` WHERE (`username` = '$un')");
@@ -50,7 +51,7 @@ if(isset($_POST['action'])) {
             if(mysqli_num_rows($checkSql) > 0) {
                 array_push($response, $un);
             } else {
-                $sql = "INSERT INTO `student`(`firstname`, `lastname`, `dob`, `class_id`, `did`, `username`, `password`, `location`, `status`, `per_no`, `gua_no`) VALUES ('$fn','$ln','$dob',$class_id, $did, '$un','','','Unregistered','','')";
+                $sql = "INSERT INTO `student`(`firstname`, `lastname`, `dob`, `class_id`, `did`, `username`, `password`, `location`, `status`, `per_no`, `gua_no`,`rollno`) VALUES ('$fn','$ln','$dob',$class_id, $did, '$un','','','Unregistered','','','$roll')";
                 $result = mysqli_query($conn,$sql);
             }
         }    
