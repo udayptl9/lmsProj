@@ -276,6 +276,7 @@
 					<th>ID Number</th>
 					<th>Class</th>
 					<th>Total</th>
+					<th>Average</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -302,6 +303,7 @@
 
 					<td width="100"><?php echo $row['class_name']; ?></td>
 					<td width="100" class='totalMarksTd'></td>
+					<td class='averageMarks'></td>
 				</tr>
 				<?php } ?>
 
@@ -363,7 +365,9 @@ if (isset($_POST['submit'])){
 			for (let i = 0; i < data.length; i++) {
 				document.querySelectorAll('.studentUSN').forEach(row => {
 					if (row.innerHTML == data[i]['USN']) {
+						let totalIAs = 0;
 						data[i]['IAs'].forEach(ia => {
+							totalIAs++;
 							if (check) {
 								let th = document.createElement('th');
 								th.innerHTML =
@@ -385,6 +389,8 @@ if (isset($_POST['submit'])){
 							row.parentElement.querySelector('.totalMarksTd').innerHTML = Number(row.parentElement
 								.querySelector('.totalMarksTd').innerHTML) + Number(ia['IAMark']);
 						})
+						row.parentElement.querySelector('.averageMarks').innerHTML = (Number(row.parentElement
+								.querySelector('.totalMarksTd').innerHTML) / Number(totalIAs)).toFixed(1);
 						check = 0;
 					}
 				})
