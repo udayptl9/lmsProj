@@ -5,7 +5,12 @@
         <div class="container-fluid">
             <div class="row-fluid" style="display: inline;">
                 <?php include('student_sidebar.php'); ?>
-                <div class="span3" id="adduser"><?php include('add_students.php'); ?></div>
+                <div class="span3" id="adduser">
+                <?php 
+                if($_SESSION['department']!=0)
+                {
+                include('add_students.php'); 
+                }?></div>
                 <div class="span6" id="">
                      <div class="row-fluid">
                         <!-- block -->

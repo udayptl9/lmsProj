@@ -17,7 +17,7 @@
 		<?php include('navbar_teacher.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
-				<?php include('teacherinfo_sidebar.php'); ?>
+				<?php include('assignment_link.php'); ?>
                 <div class="span6" id="content">
                      <div class="row-fluid">
 					    <!-- breadcrumb -->
@@ -34,7 +34,7 @@
 									        $assignment_id = $_GET['assignment_id'];
 									         $sql ="select * FROM student_assignment 
 									         WHERE teacher_class_id = $get_id AND assignment_id=$assignment_id";
-									         $result = mysqli_query($con,$sql);
+									         $result = mysqli_query($conn,$sql);
 									         $chart_data="";
 									         $logged_in = $_SESSION['id'];
 									         $allgrades = array();

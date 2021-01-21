@@ -31,7 +31,14 @@
 		<tbody>
 			
 		<?php
+		$department_id-$_SESSION['department'];
+		if($department_id==0){
 	$query = mysqli_query($conn,"select * from student LEFT JOIN class ON student.class_id = class.class_id where status = 'Registered' ORDER BY student.student_id DESC") or die(mysqli_error());
+		}
+		else
+		{
+			$query = mysqli_query($conn,"select * from student LEFT JOIN class ON student.class_id = class.class_id where status = 'Registered' AND student.did=$department_id ORDER BY student.student_id DESC") or die(mysqli_error());
+		}
 	while ($row = mysqli_fetch_array($query)) {
 		$id = $row['student_id'];
 		?>

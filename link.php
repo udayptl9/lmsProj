@@ -24,8 +24,8 @@
 				<?php include('campuses.php'); ?>
 			<li class="divider-vertical"></li>
 		<li><a href="history.php"><i class="icon-file"></i>&nbsp;History</a></li>
-			<li class="divider-vertical"></li>
-		<li><a href="developers.php"><i class="icon-user"></i>&nbsp;Developers</a></li>
+			
+		
 		<li class="divider-vertical"></li>
 	
 	</ul>

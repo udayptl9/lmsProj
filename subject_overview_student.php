@@ -47,22 +47,8 @@
 										Instructor: <strong><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></strong>
 															<br>
 															<img id="avatar" class="img-polaroid" src="admin/<?php echo $row['location']; ?>" width>
-															
-															</br>
-											<?php 
-												$teacher_id = $row['teacher_id'];
-												$query= mysqli_query($conn, "select * from edit_profile where teacher_id=$teacher_id") or die(mysqli_error());
-												$row = mysqli_fetch_array($query);
-											?>
-									<div class="info">
-										<div><h5>Name: <?php echo $row['name']; ?></h5></div>
-	  									<div><h5>Designation: <?php echo $row['designation']; ?></h5></div>
-	  									<div><h5>Qualification: <?php echo $row['qualification']; ?></h5></div>
-	  									<div><h5>Proficiency: <?php echo $row['proficiency']; ?></h5></div>
-	  									<div><h5>Teaching Experience: <?php echo $row['teaching_exp']; ?></h5></div>
-	  									<div><h5>Projects: <?php echo $row['project']; ?></h5></div>
-							
-									</div>				
+															<p><a href=""><i class="icon-search"></i> view info</a></p>
+															<hr>
 										<?php $query = mysqli_query($conn,"select * from teacher_class
 											LEFT JOIN class_subject_overview ON class_subject_overview.teacher_class_id = teacher_class.teacher_class_id
 											where class_subject_overview.teacher_class_id = '$get_id'")or die(mysqli_error());

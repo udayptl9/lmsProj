@@ -269,6 +269,7 @@
 			<thead>
 				<tr class="headings">
 					<th></th>
+					<th>Roll No</th>
 					<th>Name</th>
 					<th>ID Number</th>
 					<th>Class</th>
@@ -292,7 +293,7 @@
 						<input id="optionsCheckbox" class="uniform_on test" name="selector[]" type="checkbox"
 							value="<?php echo $id; ?>">
 					</td>
-
+					<td width="100"><?php echo $row['rollno']; ?></td>
 					<td class='studentName'><?php echo $row['firstname'] . " " . $row['lastname']; ?></td>
 					<td class='studentUSN'><?php echo $row['username']; ?></td>
 

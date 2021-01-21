@@ -30,7 +30,7 @@
 if (isset($_POST['save'])){
 $class_name = $_POST['class_name'];
 
-
+$department_id = $_SESSION['department'];
 $query = mysqli_query($conn,"select * from class where class_name  =  '$class_name' ")or die(mysqli_error());
 $count = mysqli_num_rows($query);
 
@@ -40,7 +40,7 @@ alert('Date Already Exist');
 </script>
 <?php
 }else{
-mysqli_query($conn,"insert into class (class_name) values('$class_name')")or die(mysqli_error());
+mysqli_query($conn,"insert into class (class_name,did) values('$class_name',$department_id)")or die(mysqli_error());
 ?>
 <script>
 window.location = "class.php";

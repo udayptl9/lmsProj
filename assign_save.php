@@ -3,80 +3,103 @@
 include('session.php');
 //Include database connection details
 require("opener_db.php");
-/* $errmsg_arr = array();
+$errmsg_arr = array();
 //Validation error flag
-$errflag = false; */
-$conn= $connector->DbConnector();
-$id_class=$_POST['id_class'];
+$errflag = false;
+$conn = $connector->DbConnector();
+// var_dump($conn);
+// exit;       
+$uploaded_by_query = mysqli_query($conn,"select * from teacher where teacher_id = $session_id")or die(mysqli_error());
+$uploaded_by_query_row = mysqli_fetch_array($uploaded_by_query);
+$uploaded_by = $uploaded_by_query_row['firstname']."".$uploaded_by_query_row['lastname'];
+
+/* $id_class=$_POST['id_class']; */
 $name=$_POST['name'];
-$filedesc=$_POST['desc'];
-$maxmarks=$_POST['maxmarks'];
-$get_id  = $_GET['id'];
-$input_name = basename($_FILES['uploaded_file']['name']);
-echo $input_name ;
- 
-//Function to sanitize values received from the form. Prevents SQL injection
-/* function clean($str) {
-    $str = @trim($str);
-    if (get_magic_quotes_gpc()) {
-        $str = stripslashes($str);
-    }
-    return mysqli_real_escape_string($str);
+$maxmarks = $_POST['maxmarks'];
+$questions = $_POST['questions'];
+$dateFull = $_POST['date'];
+$date = explode('-', $dateFull)[2];
+$month = explode('-', $dateFull)[1];
+$year = explode('-', $dateFull)[0];
+$dateToSave = $date. '/'.$month.'/'.$year;
+$time = $_POST['time'];
+$checkbox = 0;
+if(isset($_POST['checkbox'])) {
+	$checkbox = 1;
 }
 
- */
 
-if ($input_name == ""){
+//Function to sanitize values received from the form. Prevents SQL injection
+function clean($str) {
+    global $conn;
+    $str = @trim($str);
+    $str = stripslashes($str);
+    return mysqli_real_escape_string($conn,$str);
+}
 
-			$name_notification  = 'Add Assignment file name'." ".'<b>'.$name.'</b>';
-	   
-                mysqli_query($conn,"INSERT INTO assignment (fdesc,fdatein,teacher_id,class_id,fname,maxmarks) VALUES ('$filedesc',NOW(),'$session_id','$id_class','$name','$maxmarks')")or die(mysqli_error());
-                mysqli_query($conn,"INSERT INTO student_assignment (maxmarks) VALUES ('$maxmarks')")or die(mysqli_error());
-				 mysqli_query($conn,"insert into notification (teacher_class_id,notification,date_of_notification,link) value('$get_id','$name_notification',NOW(),'assignment_student.php')")or die(mysqli_error());               
-?>            
-			<script>
-				window.location = 'assignment.php<?php echo '?id='.$get_id;  ?>';
-			</script>
-<?php
-}else{
+//Sanitize the POST values
+$filedesc = clean($_POST['desc']);
 
+//$subject= clean($_POST['upname']);
+
+if ($filedesc == '') {
+    $errmsg_arr[] = ' file discription is missing';
+    $errflag = true;
+}
+
+if ($_FILES['uploaded_file']['size'] >= 1048576 * 5) {
+    $errmsg_arr[] = 'file selected exceeds 5MB size limit';
+    $errflag = true;
+}
+
+
+//If there are input validations, redirect back to the registration form
+if ($errflag) {
+    $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+    session_write_close();
+	?>
+	<script>
+   window.location = 'assignment.php<?php echo '?id='.$get_id;  ?>';
+   </script>
+
+   
+   <?php exit();
+}
 //upload random name/number
-	$rd2 = mt_rand(1000, 9999) . "_File";
-    $filename = basename($_FILES['uploaded_file']['name']);
-    $ext = substr($filename, strrpos($filename, '.') + 1);
-   
-/*  	if ($filename == ""){
-	  $newname = "";
-	  $rd2 = ""
-   } */ 
-   $newname = "admin/uploads/" . $rd2 . "_" . $filename;
-   
-		$name_notification  = 'Add Assignment file name'." ".'<b>'.$name.'</b>';
-        //Check if the file with the same name is already exists on the server
+$rd2 = mt_rand(1000, 9999) . "_File";
 
+//Check that we have a file
+if ((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0)) {
+    //Check if the file is JPEG image and it's size is less than 350Kb
+    $filename = basename($_FILES['uploaded_file']['name']);
+
+    $ext = substr($filename, strrpos($filename, '.') + 1);
+
+    if (($ext != "exe") && ($_FILES["uploaded_file"]["type"] != "application/x-msdownload")) {
+        //Determine the path to which we want to save this file      
+        //$newname = dirname(__FILE__).'/upload/'.$filename;
+        $newname = "admin/uploads/" . $rd2 . "_" . $filename;
+		$name_notification  = 'Add Assignment name'." ".'<b>'.$name.'</b>';
+        //Check if the file with the same name is already exists on the server
+        if (!file_exists($newname)) {
             //Attempt to move the uploaded file to it's new place
-            (move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $newname));
+            if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $newname))) {
                 //successful upload
                 // echo "It's done! The file has been saved as: ".$newname;		   
-                $qry2 = "INSERT INTO assignment (fdesc,floc,fdatein,teacher_id,class_id,fname,maxmarks) VALUES ('$filedesc','$newname',NOW(),'$session_id','$id_class','$name','$maxmarks')";
-				$query = mysqli_query($conn,"insert into notification (teacher_class_id,notification,date_of_notification,link) value('$get_id','$name_notification',NOW(),'assignment_student.php')")or die(mysqli_error());               
-			   //$result = @mysqli_query($conn,$qry);
-                $result2 = $connector->query($qry2);               
-                if ($result2) {
-                    $errmsg_arr[] = 'record was saved in the database and the file was uploaded';
-                    $errflag = true;
-                    if ($errflag) {
-                        $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-                        session_write_close();
-                        ?>
-
-                     <script>
-window.location = 'assignment.php<?php echo '?id='.$get_id;  ?>';
-					</script>
-                        <?php
-
-                        exit();
-                    }
-                }
+					
+							$id=$_POST['selector'];
+										
+               /*  $qry2 = "INSERT INTO files (fdesc,floc,fdatein,teacher_id,class_id,fname,uploaded_by) VALUES ('$filedesc','$newname',NOW(),'$session_id','$id[$i]','$name','$uploaded_by')"; */
+               // echo "INSERT INTO files (fdesc,floc,fdatein,teacher_id,class_id,fname,uploaded_by) VALUES ('$filedesc','$newname',NOW(),'$session_id','$id[$i]','$name','$uploaded_by')";
+  //               exit;
+				$result = mysqli_query($conn,"INSERT INTO assignment (fdesc,floc,fdatein,teacher_id,class_id,fname,maxmarks,qmaxmarks,deadline_date,deadline_time,auto_deadline) VALUES ('$filedesc','$newname',NOW(),$session_id,$id,'$name','$maxmarks','$questions','$dateToSave','$time',$checkbox)");
+				mysqli_query($conn,"insert into notification (teacher_class_id,notification,date_of_notification,link) value('$id','$name_notification',NOW(),'assignment_student.php')")or die(mysqli_error());
+				print_r(json_encode(array('text'=>$result)));
 }
-				?>
+}
+}
+}
+
+
+/* mysqli_close($conn); */
+?>

@@ -112,9 +112,9 @@
 										 
 										  <thead>
 										 	<tr>
-										 	<th style=" margin:0px;padding:0px;" class='excelLogo'><h2> B.L.D.E.A's V.P. Dr.P.G.Halakatti College of Engineering and Technology</h2></th></tr>
-										 	<tr><th class='excelLogo1'><h4>Department:<?php echo $class_row['department_name']; ?></h4></th></tr>
-										 	<tr><td class='excelLogo2'><h5>subject:<?php echo $class_row['subject_code']; ?></h5></td><td class='excelLogo'style="margin-left:35px;"><h5>Class:<?php echo $rr['class_name']; ?></h5></td></tr>
+										 	<th style=" margin:0px;padding:0px;display:none;" class='excelLogo'><h2> B.L.D.E.A's V.P. Dr.P.G.Halakatti College of Engineering and Technology</h2></th></tr>
+										 	<tr><th style="display:none;" class='excelLogo1'><h4>Department:<?php echo $class_row['department_name']; ?></h4></th></tr>
+										 	<tr><td style="display:none;" class='excelLogo2'><h5>subject:<?php echo $class_row['subject_code']; ?></h5></td><td style="display:none;" class='excelLogo'style="margin-left:35px;"><h5>Class:<?php echo $rr['class_name']; ?></h5></td></tr>
 										 	<tr>
 										 		</tr>
 										 
@@ -127,6 +127,7 @@
 							
 										
 				<tr class="headings">
+					<th>Roll No</th>
 					<th>Name</th>
 					<th>ID Number</th>
 					<th>Class</th>
@@ -146,7 +147,7 @@
 
 
 				<tr class="studentrows">
-
+					<td width="100"><?php echo $row['rollno']; ?></td>
 					<td class='studentName'><?php echo $row['firstname'] . " " . $row['lastname']; ?></td>
 					<td class='studentUSN'><?php echo $row['username']; ?></td>
 

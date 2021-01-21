@@ -30,6 +30,7 @@
 											<input type="text" value="<?php echo $row['subject_code']; ?>" name="subject_code" id="inputEmail" placeholder="Subject Code">
 											</div>
 										</div>
+									
 										<div class="control-group">
 											<label class="control-label" for="inputPassword">Subject Title</label>
 											<div class="controls">
@@ -51,7 +52,20 @@
 											</div>
 										</div>
 												
-																		
+										<div class="control-group">
+											<label class="control-label" for="inputEmail">Class</label>
+											<div class="controls">
+											<select name='classCode'> 
+												<?php 
+												$department_id = $_SESSION['department'];
+												$result = mysqli_query($conn, "SELECT * FROM class WHERE did=$department_id");
+												while($row=mysqli_fetch_array($result)) {
+													echo '<option value="'.$row['class_id'].'">'.$row['class_name'].'</option>';
+												}
+												 ?>
+											</select>
+											</div>
+										</div>							
 											
 										<div class="control-group">
 										<div class="controls">
@@ -67,12 +81,13 @@
 										$title = $_POST['title'];
 										$unit = $_POST['unit'];
 										$description = $_POST['description'];
-										
+										$code=$_POST['classCode'];
 										
 									
 										mysqli_query($conn,"update subject set subject_code = '$subject_code' ,
 																		subject_title = '$title',
 																		unit  = '$unit',
+																		cid = '$code',
 																		description = '$description'
 																		where subject_id = '$get_id' ")or die(mysqli_error());
 																		

@@ -4,9 +4,19 @@
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
-				<?php include('class_sidebar.php'); ?>
+			<?php 
+                    if(number_format($_SESSION['department']) == 0) {
+                        include('mainAdmin_Sidebar.php');
+                    } else {
+                        include('subAdminSidebar.php');
+                    }
+                    ?>
 				<div class="span3" id="adduser">
-				<?php include('add_class.php'); ?>		   			
+				<?php
+				if($_SESSION['department']!=0)
+				{
+				include('add_class.php'); }?>
+						   			
 				</div>
                 <div class="span6" id="">
                      <div class="row-fluid">

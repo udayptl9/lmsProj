@@ -29,7 +29,13 @@
 											<div class="controls">
 											<select name='classCode'> 
 												<?php 
+												if($_SESSION['department']==0)
+												{
+													$result = mysqli_query($conn, "SELECT * FROM class");
+												}
+												else{
 												$result = mysqli_query($conn, "SELECT * FROM class WHERE did=$department_id");
+												}
 												while($row=mysqli_fetch_array($result)) {
 													echo '<option value="'.$row['class_id'].'">'.$row['class_name'].'</option>';
 												}

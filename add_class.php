@@ -13,11 +13,11 @@
 												
 													<div class="form-group">
 													<label>Department:</label>
-														<select name="department_id" class="form-control form-control-lg department_id" id="department"  required>
+													<select name="department_id" class="form-control form-control-lg department_id" id="department"  required>
 															<option value="" disabled selected>-Select department-</option>
 															<?php
-															$department_id = $_SESSION['department'];
-															$query = mysqli_query($conn,"select * from department order by department_name ");
+															
+															$query = mysqli_query($conn,"select * from department order by department_name");
 															while($row = mysqli_fetch_array($query)){
 															
 															?>
@@ -32,7 +32,7 @@
 													<label>Class Name:</label>
 													<input type="hidden" name="session_id" class="session_id" value="<?php echo $session_id; ?>">
 														<select name="class_id" class="form-control form-control-lg class_id" id="class_name" required>
-															<option value="" disabled selected>-Select class-</option>
+															<option value="" disabled >-Select class-</option>
 
 															
 															
@@ -42,7 +42,7 @@
 													<label>Subject:</label>
 														<select name="subject_id" class="form-control form-control-lg subject_id" id="subject_code" required>
 															<option value="" disabled selected>-Select subject-</option>
-															
+
 																													
 														</select>
 													</div>

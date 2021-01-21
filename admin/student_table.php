@@ -22,7 +22,6 @@
 				
 					<th>Name</th>
 					<th>ID Number</th>
-					<th>Roll No</th>
 					<th>DoB</th>
 					
 					<th>Course Yr & Section</th>
@@ -33,7 +32,13 @@
 			
 		<?php
 		$department_id = $_SESSION['department'];
+		if($_SESSION['department']==0)
+		{
+			$query = mysqli_query($conn,"select * from student LEFT JOIN class ON student.class_id = class.class_id ORDER BY student.student_id DESC") or die(mysqli_error($conn));
+		}
+		else{
 	$query = mysqli_query($conn,"select * from student LEFT JOIN class ON student.class_id = class.class_id WHERE student.did=$department_id ORDER BY student.student_id DESC") or die(mysqli_error($conn));
+		}
 	while ($row = mysqli_fetch_array($query)) {
 		$id = $row['student_id'];
 		?>
@@ -44,10 +49,8 @@
 		<input id="optionsCheckbox" class="uniform_on" name="selector[]" type="checkbox" value="<?php echo $id; ?>">
 		</td>
 	
-		<td><?php echo $row['firstname'] . " " . $row['lastname']; ?></td>
-
+		<td><?php echo $row['firstname'] . " " . $row['lastname']; ?></td> 
 		<td><?php echo $row['username']; ?></td>
-		<td><?php echo $row['rollno']; ?></td>
 		<td><?php echo $row['dob']; ?></td>
 	
 		<td width="100"><?php echo $row['class_name']; ?></td> 

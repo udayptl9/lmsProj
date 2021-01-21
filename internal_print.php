@@ -14,7 +14,9 @@
 			</script>';
 		}
 	?>
-	<script>let totalIAs = pastInternals[0]['students'].length;</script>
+	<script>let totalIAs = pastInternals[0]['students'][0]['IAs'].length;
+</script>
+	
     <body>
     	<style> 
     		.historyAttendenece {
@@ -85,11 +87,19 @@
                         <div id="block_bg" class="block">
                         		  <div class="navbar navbar-inner block-header">
               <div id="" class="muted pull-right">
+              	<?php $class_query = mysqli_query($conn,"select * from teacher_class
+										LEFT JOIN class ON class.class_id = teacher_class.class_id
+										LEFT JOIN subject ON subject.subject_id = teacher_class.subject_id
+										LEFT JOIN department ON department.department_id = teacher_class.department_id
+										where teacher_class_id = '$get_id'")or die(mysqli_error());
+										$class_row = mysqli_fetch_array($class_query);
+								?>
                 <?php 
 								$my_student = mysqli_query($conn,"SELECT * FROM teacher_class_student
 														LEFT JOIN student ON student.student_id = teacher_class_student.student_id 
 														INNER JOIN class ON class.class_id = student.class_id where teacher_class_id = '$get_id' order by lastname ")or die(mysqli_error());
                 $count_my_student = mysqli_num_rows($my_student);
+                $rr = mysqli_fetch_array($my_student)
                 ?>
                 Number of Students: <span class="badge badge-info"><?php echo $count_my_student; ?></span>
               </div>
@@ -103,7 +113,10 @@
 										 
 										  
 										 	<tr>
-										 	<th style="display:none; margin:center;"><h2> Bldea College Of Engg</h2></th>
+										 	<th style=" margin:0px;padding:0px;display:none;" class='excelLogo'><h2> B.L.D.E.A's V.P. Dr.P.G.Halakatti College of Engineering and Technology</h2></th></tr>
+										 	<tr><th style="display:none;" class='excelLogo1'><h4>Department:<?php echo $class_row['department_name']; ?></h4></th></tr>
+										 	<tr><td style="display:none;" class='excelLogo2'><h5>subject:<?php echo $class_row['subject_code']; ?></h5></td><td style="display:none;" class='excelLogo'style="margin-left:35px;"><h5>Class:<?php echo $rr['class_name']; ?></h5></td></tr>
+										 	<tr>
 										 		</tr>
 										 
 										 
@@ -115,6 +128,7 @@
 							
 										<thead>
 				<tr class="headings">
+					<th>Roll No</th>
 					<th>Name</th>
 					<th>ID Number</th>
 					<th>Class</th>
@@ -134,7 +148,7 @@
 
 
 				<tr class="studentrows">
-
+					<td width="100"><?php echo $row['rollno']; ?></td>
 					<td class='studentName'><?php echo $row['firstname'] . " " . $row['lastname']; ?></td>
 					<td class='studentUSN'><?php echo $row['username']; ?></td>
 
@@ -214,7 +228,7 @@ if (isset($_POST['submit'])){
 							td.innerHTML = `${ia['IAMark']}`;
 							row.parentElement.appendChild(td);
 							row.parentElement.querySelector('.totalMarksTd').innerHTML = (Number(row.parentElement
-															.querySelector('.totalMarksTd').innerHTML) + Number(ia['IAMark']) / totalIAs);
+															.querySelector('.totalMarksTd').innerHTML) + Number(ia['IAMark']) / totalIAs).toFixed(2);
 						})
 						check = 0;
 					}
@@ -222,6 +236,10 @@ if (isset($_POST['submit'])){
 			}
 		})
 	</script>
+	<script>
+	  document.querySelector('.excelLogo').colSpan = `${document.querySelector('.headings').querySelectorAll('th').length}`;
+	  document.querySelector('.excelLogo1').colSpan = `${document.querySelector('.headings').querySelectorAll('th').length+1}`;
+</script>
 										
                                 </div>
                             </div>

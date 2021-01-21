@@ -25,8 +25,14 @@
                             <div class="block-content collapse in">
 							        <div class="span12">
 						
-									<?php 
-								$query_reg_teacher = mysqli_query($conn,"select * from teacher where teacher_status = 'Registered' ")or die(mysqli_error());
+                                    <?php 
+                                   $dept= $_SESSION['department'];
+                                    if($dept==0){
+                                $query_reg_teacher = mysqli_query($conn,"select * from teacher where teacher_status = 'Registered' ")or die(mysqli_error());
+                                    }
+                                else{
+                                $query_reg_teacher = mysqli_query($conn,"select * from teacher where teacher_status = 'Registered' AND teacher.department_id=$dept ")or die(mysqli_error());
+                                }
 								$count_reg_teacher = mysqli_num_rows($query_reg_teacher);
 								?>
 								
@@ -37,8 +43,15 @@
                                     </div>
                                 </div>
 								
-								<?php 
-								$query_teacher = mysqli_query($conn,"select * from teacher")or die(mysqli_error());
+                                <?php 
+                                  $dept= $_SESSION['department'];
+                                  if($dept==0){
+                                $query_teacher = mysqli_query($conn,"select * from teacher")or die(mysqli_error());
+                                  }
+                                  else
+                                  {
+                                    $query_teacher = mysqli_query($conn,"select * from teacher WHERE department_id=$dept ;")or die(mysqli_error());
+                                  }
 								$count_teacher = mysqli_num_rows($query_teacher);
 								?>
 								
@@ -49,9 +62,14 @@
 
                                     </div>
                                 </div>
-								
-								<?php 
-								$query_student = mysqli_query($conn,"select * from student where status='Registered'")or die(mysqli_error());
+                                <?php 
+                                 $dept= $_SESSION['department'];
+                                 if($dept==0){
+                                $query_student = mysqli_query($conn,"select * from student where status='Registered'")or die(mysqli_error());
+                                 }
+                                 else{
+                                    $query_student = mysqli_query($conn,"select * from student where status='Registered' AND did=$dept")or die(mysqli_error());
+                                 }
 								$count_student = mysqli_num_rows($query_student);
 								?>
 								
@@ -63,8 +81,14 @@
                                 </div>
 								
 								
-										<?php 
-								$query_student = mysqli_query($conn,"select * from student")or die(mysqli_error());
+                                <?php 
+                                         $dept= $_SESSION['department'];
+                                         if($dept==0){
+                                $query_student = mysqli_query($conn,"select * from student")or die(mysqli_error());
+                                         }
+                                         else{
+                                            $query_student = mysqli_query($conn,"select * from student WHERE did=$dept")or die(mysqli_error());
+                                         }
 								$count_student = mysqli_num_rows($query_student);
 								?>
 								
@@ -80,8 +104,14 @@
 								
 							
 								
-									<?php 
-								$query_class = mysqli_query($conn,"select * from class")or die(mysqli_error());
+                                <?php 
+                                   $dept= $_SESSION['department'];
+                                   if($dept==0){ 
+                                $query_class = mysqli_query($conn,"select * from class")or die(mysqli_error());
+                                   }
+                                   else{
+                                    $query_class = mysqli_query($conn,"select * from class WHERE did=$dept")or die(mysqli_error());
+                                   }
 								$count_class = mysqli_num_rows($query_class);
 								?>
 								
@@ -93,7 +123,9 @@
                                 </div>
 								
 								
-										<?php 
+                                        <?php 
+                                        $dept= $_SESSION['department'];
+                                        if($dept==0){ 
 								$query_file = mysqli_query($conn,"select * from files")or die(mysqli_error());
 								$count_file = mysqli_num_rows($query_file);
 								?>
@@ -106,8 +138,15 @@
                                 </div>
 								
 								
-										<?php 
-								$query_subject = mysqli_query($conn,"select * from subject")or die(mysqli_error());
+                                  <?php } ?>
+                                       <?php 
+                                         $dept= $_SESSION['department'];
+                                         if($dept==0){ 
+                                $query_subject = mysqli_query($conn,"select * from subject")or die(mysqli_error());
+                                         }
+                                         else{
+                                            $query_subject = mysqli_query($conn,"select * from subject WHERE cid IN (SELECT class_id from class WHERE did=$dept)")or die(mysqli_error());
+                                         }
 								$count_subject = mysqli_num_rows($query_subject);
 								?>
 								

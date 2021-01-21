@@ -1,3 +1,3 @@
 <?php
-  $conn = mysqli_connect('localhost','root','','capstone') or die(mysqli_error());
+$conn = mysqli_connect('localhost','root','','capstone (15-01-2021)') or die(mysqli_error());
 ?>

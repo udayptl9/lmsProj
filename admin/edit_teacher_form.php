@@ -1,5 +1,10 @@
    <div class="row-fluid">
-       <a href="teachers.php" class="btn btn-info"><i class="icon-plus-sign icon-large"></i> Add Teacher</a>
+   <?php 
+   if($_SESSION['department']!=0)
+   {
+    echo '<a href="teachers.php" class="btn btn-info"><i class="icon-plus-sign icon-large"></i> Add Teacher</a>';
+   }
+   ?>
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
@@ -35,7 +40,11 @@
                                           </div>
                                         </div>
 										
-										
+                    <div class="control-group">
+                                          <div class="controls">
+                                            <input class="input focused" value="<?php echo $row['password']; ?>" name="pwd" id="focusedInput" type="password" placeholder = "pPassword">
+                                          </div>
+                                        </div>
 									
 											<div class="control-group">
                                           <div class="controls">
@@ -56,6 +65,7 @@
                        
                                 $firstname = $_POST['firstname'];
                                 $lastname = $_POST['lastname'];
+                                $pwd = $_POST['pwd'];
 								
 								
 								$query = mysqli_query($conn,"select * from teacher where firstname = '$firstname' and lastname = '$lastname' ")or die(mysqli_error());
@@ -68,7 +78,7 @@
 								<?php
 								}else{
 								
-								mysqli_query($conn,"update teacher set firstname = '$firstname' , lastname = '$lastname' where teacher_id = '$get_id' ")or die(mysqli_error());	
+								mysqli_query($conn,"update teacher set firstname = '$firstname' , lastname = '$lastname', password='$pwd' where teacher_id = '$get_id' ")or die(mysqli_error());	
 								
 								?>
 								<script>

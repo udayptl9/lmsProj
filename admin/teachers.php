@@ -6,7 +6,11 @@
             <div class="row-fluid">
 				<?php include('teacher_sidebar.php'); ?>
 				<div class="span3" id="adduser">
-				<?php include('add_teacher.php'); ?>		   			
+                <?php 
+                if($_SESSION['department']!=0)
+                {
+                include('add_teacher.php'); }?>		   			
+                
 				</div>
                 <div class="span6" id="">
                      <div class="row-fluid">
@@ -24,7 +28,7 @@
 										<thead>
 										    <tr>
                                     <th></th>
-                                    <th>Photo</th>
+                                    <th></th>
                                     <th>Name</th>
                                     <th>Username</th>
 
@@ -34,7 +38,16 @@
 										<tbody>
 												 <?php
                                                  $department_id = $_SESSION['department'];
-                                    $teacher_query = mysqli_query($conn,"SELECT * FROM teacher WHERE department_id=$department_id;") or die(mysqli_error());
+                                                 $iddd=$_SESSION['id'];
+                                    if($department_id==0)
+                                    {
+                                        $teacher_query = mysqli_query($conn,"SELECT * FROM teacher ;") or die(mysqli_error());
+                                    }
+                                    else{
+                                        $teacher_query = mysqli_query($conn,"SELECT * FROM teacher t WHERE department_id IN (SELECT did FROM users WHERE user_id = $iddd) ;") or die(mysqli_error());
+
+                                    }
+                                    
                                     while ($row = mysqli_fetch_array($teacher_query)) {
                                     $id = $row['teacher_id'];
                                     $teacher_stat = $row['teacher_stat'];

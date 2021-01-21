@@ -71,11 +71,19 @@
                         <div id="block_bg" class="block">
                         		  <div class="navbar navbar-inner block-header">
               <div id="" class="muted pull-right">
+              	<?php $class_query = mysqli_query($conn,"select * from teacher_class
+										LEFT JOIN class ON class.class_id = teacher_class.class_id
+										LEFT JOIN subject ON subject.subject_id = teacher_class.subject_id
+										LEFT JOIN department ON department.department_id = teacher_class.department_id
+										where teacher_class_id = '$get_id'")or die(mysqli_error());
+										$class_row = mysqli_fetch_array($class_query);
+								?>
                 <?php 
 								$my_student = mysqli_query($conn,"SELECT * FROM teacher_class_student
 														LEFT JOIN student ON student.student_id = teacher_class_student.student_id 
 														INNER JOIN class ON class.class_id = student.class_id where teacher_class_id = '$get_id' order by lastname ")or die(mysqli_error());
                 $count_my_student = mysqli_num_rows($my_student);
+                $rr = mysqli_fetch_array($my_student)
                 ?>
                 Number of Students: <span class="badge badge-info"><?php echo $count_my_student; ?></span>
               </div>
@@ -99,7 +107,12 @@
 										 
 										  
 										 	
-										 	<th style="display:none" class='excelLogo'> Bldea College Of Engg</th>
+										 	<tr>
+										 	<th style=" margin:0px;padding:0px;display:none;" class='excelLogo'><h2> B.L.D.E.A's V.P. Dr.P.G.Halakatti College of Engineering and Technology</h2></th></tr>
+										 	<tr><th style="display:none;" class='excelLogo1'><h4>Department:<?php echo $class_row['department_name']; ?></h4></th></tr>
+										 	<tr><td style="display:none;" class='excelLogo2'><h5>subject:<?php echo $class_row['subject_code']; ?></h5></td><td style="display:none;" class='excelLogo'style="margin-left:35px;"><h5>Class:<?php echo $rr['class_name']; ?></h5></td></tr>
+										 	<tr>
+										 		</tr>
 										<thead>
 										        <tr class='attendenecsHeading'>
 										        <th>Roll No.</th>	
@@ -166,6 +179,10 @@
 	                   })
                      document.querySelector('.excelLogo').colSpan = `${document.querySelector('.attendenecsHeading').querySelectorAll('th').length}`;
                   </script>
+                  <script>
+	  document.querySelector('.excelLogo').colSpan = `${document.querySelector('.headings').querySelectorAll('th').length}`;
+	  document.querySelector('.excelLogo1').colSpan = `${document.querySelector('.headings').querySelectorAll('th').length+1}`;
+</script>
               </div>
             </div>
                 </div>

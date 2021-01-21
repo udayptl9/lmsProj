@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
 				<?php include('teacher_message_sidebar.php'); ?>
-                <div class="span6" id="content">
+                <div class="span8" id="content">
                      <div class="row-fluid">
 					    <!-- breadcrumb -->	
 					     <ul class="breadcrumb">

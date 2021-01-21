@@ -30,50 +30,43 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12 teacherInfo">
-										<div class="alert alert-info"><i class="icon-info-sign"></i> About Me</div>
-								<?php $query= mysqli_query($conn,"select * from edit_profile where teacher_id = '$session_id'")or die(mysqli_error());
-								$row = mysqli_fetch_array($query);
-									?>
-									<div class="info" style='position: relative;'>
-										
-
-										<div><h4>Name: <?php echo $row['name']; ?></h4></div>
-	  									<div><h4>Designation: <?php echo $row['designation']; ?></h4></div>
-	  									<div><h4>Qualification: <?php echo $row['qualification']; ?></h4></div>
-	  									<div><h4>Proficiency: <?php echo $row['proficiency']; ?></h4></div>
-	  									<div><h4>Teaching Experience: <?php echo $row['teaching_exp']; ?></h4></div>
-	  									
-	  									<div><h4 id="NAME" class="projectsDisplay">Project Handled: </h4></div>
-	  									<div><h4 class='publicationsDisplay'>Publication: </h4></div>
-	  									<div style='position: absolute; top: 15px; right: 15px;'><img src="<?php echo $row['image']; ?>" style="width: 200px;" alt='profile Image'></div>
-	  									<script type="text/javascript">
-	  										const publicationsObject = JSON.parse('<?php echo $row["publication"]; ?>');
-	  										let index = 1;
-	  										publicationsObject['publications'].forEach(publication=>{
-	  											if(index == publicationsObject['publications'].length) {
-	  												document.querySelector('.publicationsDisplay').innerHTML += `• ${publication}<br>`;
-	  											} else {
-	  												document.querySelector('.publicationsDisplay').innerHTML += `<br>• ${publication} <br> `;
-	  											}
-	  											index++;
-	  										})
-	  									</script>
-	  									<script>
-	  										const projectsObject = JSON.parse('<?php echo $row["project"]; ?>');
-	  										index = 1;
-	  										projectsObject['projects'].forEach(project=>{
-	  											if(index == projectsObject['projects'].length) {
-	  												document.querySelector('.projectsDisplay').innerHTML
-	  													+= `• ${project} <br>`;
-	  											} else {
-	  												document.querySelector('.projectsDisplay').innerHTML
-	  													+= `<br>• ${project} <br>`;
-	  											}
-	  											index++
-	  										})
-	  									</script>
-										
-									</div>
+										<div class="alert alert-info">About Me</div>
+										<?php $query= mysqli_query($conn,"select * from teacher where teacher_id = '$session_id'")or die(mysqli_error());
+										$row = mysqli_fetch_array($query);
+						?>
+								<form method="post" action="edit_teacher.php" id="profile_teacher">
+									<table>
+  									<tr>
+									  <th><h5>Full Name:</h5></th><th><h5><?php echo $row['firstname']." ";echo $row['lastname'];?></h5></th>
+									</tr>
+									<tr>
+									  <th><h5>Qualifications:</h5></th><th><h5><input type="text" name="quali" value="<?php echo $row['qualification']." ";?>"></h5></th>
+									</tr>
+									<img src="admin/<?php echo $row['location']; ?>" width="200" height="200" style="float:right" alt='profile Image'>
+									<tr>
+									  <th><h5>Experience:</h5></th><th><h5><input type="text" name="exp" value="<?php echo $row['experience']." ";?>"></h5></th>
+									</tr>
+									<tr>
+									  <th><h5>Proficiency:</h5></th><th><h5><input type="text" name="prof" value="<?php echo $row['prof']." ";?>"></h5></th>
+									</tr>
+									<tr>
+									  <th><h5>Designation:</h5></th><th><h5><select name="desig" id="designation">
+													<option></option>
+													<option>ASST.PROFESSOR</option>
+													<option>SENIOR.PROFESSOR</option>
+													<option>SENIOR.PROFESSOR AND HOD</option>
+													
+												</select></h5></th>
+									</tr>
+									<tr>
+									  <th><h5>Publications:</h5></th><th><h5><textarea name="pub" ><?php echo $row['publication']." ";?></textarea></h5></th>
+									</tr>
+									<tr>
+									  <th><h5>projects:</h5></th><th><h5><textarea type="text" name="proj"><?php echo $row['projects']." ";?></textarea></h5></th>
+									</tr>
+									</table>
+									<button name="save" type="submit" class="btn btn-success"><i class="icon-save" ></i> Save</button>
+								</form>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +75,7 @@
 
 
                 </div>
-				
+				<?php include('teacher_right_sidebar.php') ?>
             </div>
 		<?php include('footer.php'); ?>
         </div>

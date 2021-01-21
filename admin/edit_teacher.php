@@ -35,7 +35,13 @@
 										<tbody>
 												 <?php
                                                  $department_id = $_SESSION['department'];
+                                                 if($department_id==0)
+                                                 {
+                                                    $teacher_query = mysqli_query($conn,"SELECT * FROM teacher;") or die(mysqli_error());
+                                                 }
+                                                 else{
                                     $teacher_query = mysqli_query($conn,"SELECT * FROM teacher WHERE department_id=$department_id;") or die(mysqli_error());
+                                                 }
                                     while ($row = mysqli_fetch_array($teacher_query)) {
                                     $id = $row['teacher_id'];
                                     $teacher_stat = $row['teacher_stat'];

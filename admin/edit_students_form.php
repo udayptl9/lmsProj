@@ -1,9 +1,16 @@
    <div class="row-fluid">
-       <a href="students.php" class="btn btn-info"><i class="icon-plus-sign icon-large"></i> Add Student</a>
+   <?php
+   if($_SESSION['department']!=0)
+   {
+      echo' <a href="students.php" class="btn btn-info"><i class="icon-plus-sign icon-large"></i> Add Student</a>';
+   }
+   ?>
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Add Student</div>
+                            
+                            <div class="muted pull-left">Edit Student</div>
+                            
                             </div>
                             <div class="block-content collapse in">
 							<?php
@@ -52,7 +59,11 @@
                                             <input  name="zn" value="<?php echo $row['dob']; ?>" class="input focused" id="focusedInput" type="number" pattern="/^-?\d+\.??\d*$/" onkeyup="this.value = this.value.replace(/[^0-9]/,'')"  placeholder = "DDMMYYYY" onKeyPress="if(this.value.length==8) return false;" >
                                           </div>
                                         </div>
-								
+                      <div class="control-group">
+                                          <div class="controls">
+                                            <input  name="pwd"  value="<?php echo $row['password']; ?>" class="input focused" id="focusedInput" type="password"  placeholder = "password">
+                                          </div>
+                                        </div>
 										
 											<div class="control-group">
                                           <div class="controls">
@@ -77,9 +88,10 @@
                                 $ln = $_POST['ln'];
                                 $zn = $_POST['zn'];
                                 $cys = $_POST['cys'];
+                                $pwd = $_POST['pwd'];
                       
 
-								mysqli_query($conn,"update student set username = '$un' , firstname ='$fn' , lastname = '$ln' , class_id = '$cys' where student_id = '$get_id' ")or die(mysqli_error());
+								mysqli_query($conn,"update student set username = '$un' , firstname ='$fn' , lastname = '$ln' , class_id = '$cys', password = '$pwd' where student_id = '$get_id' ")or die(mysqli_error());
 
 								?>
  

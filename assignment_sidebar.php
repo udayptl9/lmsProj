@@ -87,12 +87,21 @@
 					})
 					var formData = new FormData($(this)[0]);
 					formData.append('questions', JSON.stringify(allQuestions));
+					formData.append('selector', <?php echo $_GET['id']; ?>);
 					$.ajax({
 						type: "POST",
-						url: "add_assignment_save.php",
+						url: "assign_save.php",
 						data: formData,
 						success: function(html){
 							console.log(html);
+							try {
+								if(JSON.parse(html).text) {
+									window.location.reload();
+								}	
+							} catch (error){
+								console.log(error)
+							}
+							
 							//$.jGrowl("Assignment Successfully Added", { header: 'Assignment Added' });
 							//window.location = 'add_assignment.php';
 						},

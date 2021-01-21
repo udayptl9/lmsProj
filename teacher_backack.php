@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
 				<?php include('backpack_sidebar_teacher.php'); ?>
-                <div class="span9" id="content">
+                <div class="span10" id="content">
                      <div class="row-fluid">
 					    <!-- breadcrumb -->	
 									<ul class="breadcrumb">

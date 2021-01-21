@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
 				<?php include('annoucement_link.php'); ?>
-                <div class="span5" id="content">
+                <div class="span7" id="content">
                      <div class="row-fluid">
 					  <!-- breadcrumb -->
 				

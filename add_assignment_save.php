@@ -97,7 +97,7 @@ if ((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 
   //               exit;
 				$result = mysqli_query($conn,"INSERT INTO assignment (fdesc,floc,fdatein,teacher_id,class_id,fname,maxmarks,qmaxmarks,deadline_date,deadline_time,auto_deadline) VALUES ('$filedesc','$newname',NOW(),'$session_id','$id[$i]','$name','$maxmarks','$questions','$dateToSave','$time',$checkbox)");
 				mysqli_query($conn,"insert into notification (teacher_class_id,notification,date_of_notification,link) value('$id[$i]','$name_notification',NOW(),'assignment_student.php')")or die(mysqli_error());
-				print_r($result);
+				print_r(json_encode(array('text'=>$result)));
 			   
 			  }
 			   

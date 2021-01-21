@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
 				<?php include('downloadable_link.php'); ?>
-                <div class="span6" id="content">
+                <div class="span8" id="content">
                      <div class="row-fluid">
 					    <!-- breadcrumb -->
 										<?php $class_query = mysqli_query($conn,"select * from teacher_class

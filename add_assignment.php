@@ -113,6 +113,13 @@
 						data: formData,
 						success: function(html){
 							console.log(html);
+							try {
+								if(JSON.parse(html).text) {
+									window.location.reload();
+								}
+							} catch (error) {
+								console.log(error);
+							}
 							//$.jGrowl("Assignment Successfully Added", { header: 'Assignment Added' });
 							//window.location = 'add_assignment.php';
 						},

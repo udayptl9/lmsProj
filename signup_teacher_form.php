@@ -2,18 +2,8 @@
 					<h3 class="form-signin-heading"><i class="icon-lock"></i> Sign up as Teacher</h3>
 					<input type="text" class="input-block-level"  name="firstname" placeholder="Firstname" required>
 					<input type="text" class="input-block-level"  name="lastname" placeholder="Lastname" required>
-					<label>Course</label>
-					<select name="course_id" class="input-block-level span12">
-						<option></option>
-						<?php
-						$query = mysqli_query($conn,"select * from course order by course_name ")or die(mysqli_error());
-						while($row = mysqli_fetch_array($query)){
-						?>
-						<option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name']; ?></option>
-						<?php
-						}
-						?>
-					</select>
+					
+				
 					<label>Department</label>
 					<select name="department_id" class="input-block-level span12">
 						<option></option>

@@ -9,12 +9,12 @@
 							<div class="row-fluid">
 
 						<div class="span4">
-						<img class="index_logo" src="admin/images/logo1.png">
+						<img class="index_logo" src="admin/images/logo2.png">
 						</div>	
 						<div class="span8">
 						
 								<div class="title">
-							<p class="chmsc">A BETTER WAY FOR LEARNING</p>
+							<p class="chmsc">BLDEA's SHRI SANGANABASAVA MAHASWAMIJI COLLEGE OF PHARMACY AND RESEARCH CENTER</p>
 							<h3>
 
 							<p>BIDS-Learning</p>
